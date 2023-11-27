@@ -1,8 +1,9 @@
-package com.sarang.torang.di.feed_di
+package com.sryang.torang.di.feed_di
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.sarang.torang.BuildConfig
+import com.sryang.torang.di.feed_di.FeedScreen
+import com.sryang.torang.BuildConfig.*
 
 @Composable
 fun ProvideFeedScreen(navController: NavHostController) {
@@ -12,8 +13,8 @@ fun ProvideFeedScreen(navController: NavHostController) {
         onImage = {},
         onName = {},
         clickAddReview = { navController.navigate("addReview") },
-        profileImageServerUrl = BuildConfig.PROFILE_IMAGE_SERVER_URL,
-        imageServerUrl = BuildConfig.REVIEW_IMAGE_SERVER_URL,
+        profileImageServerUrl = PROFILE_IMAGE_SERVER_URL,
+        imageServerUrl = REVIEW_IMAGE_SERVER_URL,
         ratingBar = {}
     )
 }

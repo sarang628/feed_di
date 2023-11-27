@@ -1,11 +1,10 @@
-package com.posco.feedscreentestapp.di.feed
+package com.sryang.torang.di.feed_di
 
 import com.sryang.base.feed.data.Restaurant
 import com.sryang.base.feed.data.Review
 import com.sryang.base.feed.data.User
-import com.sryang.torang.data.CommentData
-import com.sryang.torang.data.FeedData
-import com.sryang.torang.uistate.CommentItemUiState
+import com.sryang.torang.data1.CommentData
+import com.sryang.torang.data1.FeedData
 import com.sryang.torang_repository.data.RemoteComment
 import com.sryang.torang_repository.data.entity.FeedEntity
 import com.sryang.torang_repository.data.entity.ReviewAndImageEntity
@@ -64,19 +63,6 @@ fun FeedData.review(): Review {
         isLike = this.isLike,
         isFavorite = this.isFavorite,
         contents = this.contents
-    )
-}
-
-
-fun CommentData.toCommentItemUiState(): CommentItemUiState
-{
-    return CommentItemUiState(
-        userId = userId,
-        profileImageUrl = profileImageUrl,
-        date = date,
-        comment = comment,
-        name = name,
-        likeCount = likeCount
     )
 }
 

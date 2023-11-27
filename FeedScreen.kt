@@ -1,21 +1,13 @@
-package com.posco.feedscreentestapp.di.feed
+package com.sryang.torang.di.feed_di
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.posco.feedscreentestapp.BuildConfig
 import com.sryang.base.feed.compose.feed.Feeds
-import com.sryang.base.feed.compose.feed.TorangToolbar
-import com.sryang.library.comment.CommentBottomSheetDialog
-import com.sryang.library.feed_menu.FeedMenuBottomSheetDialog
-import com.sryang.library.share.ShareBottomSheetDialog
+import com.sryang.torang.BuildConfig
 import com.sryang.torang.compose.FeedsScreen
-import com.sryang.torang.compose.report.ReportModal
-import com.sryang.torang.compose.report.ReportScreen
 import com.sryang.torang.viewmodels.FeedsViewModel
 
 @Composable
@@ -33,16 +25,16 @@ fun FeedScreen(
     val uiState by feedsViewModel.uiState.collectAsState()
 
     Box {
-        FeedsScreen(feedsViewModel = feedsViewModel,
+        FeedsScreen(
             feeds = {
-                Feeds(list = ArrayList(uiState.list.stream().map { it.review() }.toList()),
+                Feeds(list = ArrayList(uiState.list.map { it.review() }),
                     onProfile = onProfile,
-                    onMenu = { feedsViewModel.onMenu(it) },
+                    onMenu = { },
                     onImage = onImage,
                     onName = { onName },
                     onLike = { feedsViewModel.onLike(it) },
-                    onComment = { feedsViewModel.onComment(it) },
-                    onShare = { feedsViewModel.onShare() },
+                    onComment = { },
+                    onShare = { },
                     onFavorite = { feedsViewModel.onFavorite(it) },
                     onRestaurant = onRestaurant,
                     profileImageServerUrl = profileImageServerUrl,
@@ -56,45 +48,6 @@ fun FeedScreen(
                     onBottom = {})
             },
             onAddReview = { clickAddReview.invoke() },
-            feedMenuBottomSheetDialog = {
-                FeedMenuBottomSheetDialog(
-                    isExpand = it,
-                    onEdit = {},
-                    onDelete = {},
-                    onReport = { feedsViewModel.onReport() },
-                    onClose = { feedsViewModel.closeMenu() },
-                    isMine = false
-                )
-            },
-            commentBottomSheetDialog = {
-                CommentBottomSheetDialog(isExpand = it,
-                    onSelect = {},
-                    onClose = { feedsViewModel.closeComment() },
-                    list = uiState.comments?.stream()?.map { it.toCommentItemUiState() }
-                        ?.toList() ?: ArrayList(),
-                    onSend = { feedsViewModel.sendComment(it) },
-                    profileImageUrl = uiState.myProfileUrl ?: "",
-                    profileImageServerUrl = profileImageServerUrl,
-                    name = "name"
-                )
-            },
-            shareBottomSheetDialog = {
-                ShareBottomSheetDialog(
-                    isExpand = true,
-                    onSelect = {},
-                    onClose = { feedsViewModel.closeShare() },
-                    list = ArrayList()
-                )
-            },
-            errorComponent = {},
-            reportDialog = {
-                uiState.selectedReviewId?.let {
-                    ReportModal(
-                        reviewId = it,
-                        onReported = { feedsViewModel.closeReportDialog() },
-                        profileServerUrl = profileImageServerUrl
-                    )
-                }
-            })
+            errorComponent = {})
     }
 }
