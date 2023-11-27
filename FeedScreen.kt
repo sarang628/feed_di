@@ -1,18 +1,21 @@
-package com.sarang.torang.di.feed_di
+package com.posco.feedscreentestapp.di.feed
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.sarang.torang.BuildConfig
+import com.posco.feedscreentestapp.BuildConfig
 import com.sryang.base.feed.compose.feed.Feeds
 import com.sryang.base.feed.compose.feed.TorangToolbar
+import com.sryang.library.comment.CommentBottomSheetDialog
+import com.sryang.library.feed_menu.FeedMenuBottomSheetDialog
+import com.sryang.library.share.ShareBottomSheetDialog
 import com.sryang.torang.compose.FeedsScreen
-import com.sryang.torang.compose.bottomsheet.comment.CommentBottomSheetDialog
-import com.sryang.torang.compose.bottomsheet.feed.FeedMenuBottomSheetDialog
-import com.sryang.torang.compose.bottomsheet.share.ShareBottomSheetDialog
 import com.sryang.torang.compose.report.ReportModal
+import com.sryang.torang.compose.report.ReportScreen
 import com.sryang.torang.viewmodels.FeedsViewModel
 
 @Composable
@@ -26,8 +29,7 @@ fun FeedScreen(
     onRestaurant: ((Int) -> Unit),
     imageServerUrl: String = BuildConfig.REVIEW_IMAGE_SERVER_URL,
     ratingBar: @Composable (Float) -> Unit
-)
-{
+) {
     val uiState by feedsViewModel.uiState.collectAsState()
 
     Box {
@@ -53,9 +55,10 @@ fun FeedScreen(
                     isLoaded = true,
                     onBottom = {})
             },
-            torangToolbar = { TorangToolbar { clickAddReview.invoke() } },
+            onAddReview = { clickAddReview.invoke() },
             feedMenuBottomSheetDialog = {
-                FeedMenuBottomSheetDialog(isExpand = it,
+                FeedMenuBottomSheetDialog(
+                    isExpand = it,
                     onEdit = {},
                     onDelete = {},
                     onReport = { feedsViewModel.onReport() },
@@ -76,16 +79,21 @@ fun FeedScreen(
                 )
             },
             shareBottomSheetDialog = {
-                ShareBottomSheetDialog(isExpand = true,
+                ShareBottomSheetDialog(
+                    isExpand = true,
                     onSelect = {},
                     onClose = { feedsViewModel.closeShare() },
-                    profileServerUrl = profileImageServerUrl
+                    list = ArrayList()
                 )
             },
             errorComponent = {},
             reportDialog = {
                 uiState.selectedReviewId?.let {
-                    ReportModal(reviewId = it, onReported = {feedsViewModel.closeReportDialog()}, profileServerUrl = profileImageServerUrl)
+                    ReportModal(
+                        reviewId = it,
+                        onReported = { feedsViewModel.closeReportDialog() },
+                        profileServerUrl = profileImageServerUrl
+                    )
                 }
             })
     }
