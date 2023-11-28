@@ -15,6 +15,9 @@ fun ProvideFeedScreen(navController: NavHostController) {
         clickAddReview = { navController.navigate("addReview") },
         profileImageServerUrl = PROFILE_IMAGE_SERVER_URL,
         imageServerUrl = REVIEW_IMAGE_SERVER_URL,
-        ratingBar = {}
+        ratingBar = {},
+        onComment = {},
+        onMenu = {},
+        onShare = {}
     )
 }
