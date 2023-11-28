@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sryang.base.feed.compose.feed.Feeds
-import com.sarang.torang.BuildConfig
+import com.sryang.main.BuildConfig
 import com.sryang.torang.R
 import com.sryang.torang.uistate.FeedUiState
 import com.sryang.torang.uistate.isEmpty
@@ -44,6 +44,8 @@ fun FeedScreen(
     onComment: ((Int) -> Unit),
     onShare: ((Int) -> Unit),
     onMenu: ((Int) -> Unit),
+    onReport: ((Int) -> Unit),
+    onReported: () -> Unit,
     ratingBar: @Composable (Float) -> Unit
 ) {
     val uiState: FeedUiState by feedsViewModel.uiState.collectAsState()

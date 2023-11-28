@@ -2,9 +2,8 @@ package com.sryang.torang.di.feed_di
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.sarang.torang.BuildConfig.PROFILE_IMAGE_SERVER_URL
-import com.sarang.torang.BuildConfig.REVIEW_IMAGE_SERVER_URL
-import com.sryang.torang.di.feed_di.FeedScreen
+import com.sryang.main.BuildConfig.PROFILE_IMAGE_SERVER_URL
+import com.sryang.main.BuildConfig.REVIEW_IMAGE_SERVER_URL
 
 @Composable
 fun ProvideFeedScreen(navController: NavHostController) {
@@ -19,6 +18,8 @@ fun ProvideFeedScreen(navController: NavHostController) {
         ratingBar = {},
         onComment = {},
         onMenu = {},
-        onShare = {}
+        onShare = {},
+        onReport = {},
+        onReported = {}
     )
 }
