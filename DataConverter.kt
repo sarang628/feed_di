@@ -3,8 +3,8 @@ package com.sryang.torang.di.feed_di
 import com.sryang.base.feed.data.Restaurant
 import com.sryang.base.feed.data.Review
 import com.sryang.base.feed.data.User
-import com.sryang.torang.data1.CommentData
-import com.sryang.torang.data1.FeedData
+import com.sryang.torang.data.feed.CommentData
+import com.sryang.torang.data.feed.FeedData
 import com.sryang.torang_repository.data.RemoteComment
 import com.sryang.torang_repository.data.entity.FeedEntity
 import com.sryang.torang_repository.data.entity.ReviewAndImageEntity
@@ -76,18 +76,10 @@ fun ReviewAndImageEntity.toFeedData(): FeedData {
         profilePictureUrl = this.review.profilePicUrl,
         likeAmount = this.review.likeAmount,
         commentAmount = this.review.commentAmount,
-        author = "",
-        author1 = "",
-        author2 = "",
-        comment = "",
-        comment1 = "",
-        comment2 = "",
         isLike = this.like != null,
         isFavorite = this.favorite != null,
-        visibleLike = false,
-        visibleComment = false,
         contents = this.review.contents,
-        reviewImages = this.images.stream().map { it.pictureUrl }.toList(),
+        reviewImages = this.images.map { it.pictureUrl },
         restaurantId = this.review.restaurantId
     )
 }

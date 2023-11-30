@@ -1,6 +1,6 @@
 package com.sryang.torang.di.feed_di
 
-import com.sryang.torang.data1.FeedData
+import com.sryang.torang.data.feed.FeedData
 import com.sryang.torang.usecase.AddFavoriteUseCase
 import com.sryang.torang.usecase.AddLikeUseCase
 import com.sryang.torang.usecase.DeleteFavoriteUseCase
