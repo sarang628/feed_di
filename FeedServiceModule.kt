@@ -1,6 +1,6 @@
 package com.sryang.torang.di.feed_di
 
-import com.sryang.torang.data.feed.FeedData
+import com.sryang.torang.data.feed.Feed
 import com.sryang.torang.usecase.AddFavoriteUseCase
 import com.sryang.torang.usecase.AddLikeUseCase
 import com.sryang.torang.usecase.DeleteFavoriteUseCase
@@ -82,7 +82,7 @@ class FeedServiceModule {
         feedRepository: FeedRepository
     ): GetFeedFlowUseCase {
         return object : GetFeedFlowUseCase {
-            override suspend fun invoke(): Flow<List<FeedData>> {
+            override suspend fun invoke(): Flow<List<Feed>> {
                 return feedRepository.feeds.map {
                     it.map { it.toFeedData() }
                 }

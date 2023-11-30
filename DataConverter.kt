@@ -4,7 +4,7 @@ import com.sryang.base.feed.data.Restaurant
 import com.sryang.base.feed.data.Review
 import com.sryang.base.feed.data.User
 import com.sryang.torang.data.feed.CommentData
-import com.sryang.torang.data.feed.FeedData
+import com.sryang.torang.data.feed.Feed
 import com.sryang.torang_repository.data.RemoteComment
 import com.sryang.torang_repository.data.entity.FeedEntity
 import com.sryang.torang_repository.data.entity.ReviewAndImageEntity
@@ -43,7 +43,7 @@ fun FeedEntity.review(): Review {
     )
 }
 
-fun FeedData.review(): Review {
+fun Feed.review(): Review {
     return Review(
         reviewId = this.reviewId,
         reviewImages = this.reviewImages,
@@ -66,8 +66,8 @@ fun FeedData.review(): Review {
     )
 }
 
-fun ReviewAndImageEntity.toFeedData(): FeedData {
-    return FeedData(
+fun ReviewAndImageEntity.toFeedData(): Feed {
+    return Feed(
         reviewId = this.review.reviewId,
         userId = this.review.userId,
         name = this.review.userName,
