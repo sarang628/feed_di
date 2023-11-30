@@ -6,8 +6,12 @@ import com.sryang.torang.BuildConfig
 import com.sryang.torang.compose.FeedScreen
 import com.sryang.torang.uistate.isEmpty
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProvideFeedScreen(
+fun FeedScreen(
+    profileImageServerUrl: String = BuildConfig.PROFILE_IMAGE_SERVER_URL,
+    imageServerUrl: String = BuildConfig.REVIEW_IMAGE_SERVER_URL,
+    feedsViewModel: FeedsViewModel = hiltViewModel(),
     clickAddReview: (() -> Unit),
     onProfile: ((Int) -> Unit),
     onImage: ((Int) -> Unit),
