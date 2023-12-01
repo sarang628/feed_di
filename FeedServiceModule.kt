@@ -29,7 +29,6 @@ class FeedServiceModule {
         return object : FeedRefreshUseCase {
             override suspend fun invoke() {
                 feedRepository.loadFeed()
-//                feedRepository.deleteFeedAll()
             }
         }
     }
