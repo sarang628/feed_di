@@ -3,45 +3,8 @@ package com.sryang.torang.di.feed_di
 import com.sryang.base.feed.data.Restaurant
 import com.sryang.base.feed.data.Review
 import com.sryang.base.feed.data.User
-import com.sryang.torang.data.feed.CommentData
 import com.sryang.torang.data.feed.Feed
-import com.sryang.torang_repository.data.RemoteComment
-import com.sryang.torang_repository.data.entity.FeedEntity
 import com.sryang.torang_repository.data.entity.ReviewAndImageEntity
-
-fun RemoteComment.toCommentData(): CommentData {
-    return CommentData(
-        userId = this.user.userId,
-        profileImageUrl = this.user.profilePicUrl,
-        date = this.create_date,
-        comment = this.comment,
-        name = this.user.userName,
-        likeCount = 0
-    )
-}
-
-
-fun FeedEntity.review(): Review {
-    return Review(
-        reviewId = this.reviewId,
-        likeAmount = this.likeAmount,
-        commentAmount = this.commentAmount,
-        isLike = false,
-        isFavorite = false,
-        contents = this.contents,
-        rating = this.rating,
-        comments = null,
-        restaurant = Restaurant(
-            restaurantName = this.restaurantName,
-            restaurantId = this.restaurantId,
-        ),
-        user = User(
-            userId = this.userId,
-            name = this.userName,
-            profilePictureUrl = this.profilePicUrl
-        )
-    )
-}
 
 fun Feed.review(): Review {
     return Review(

@@ -3,8 +3,7 @@ package com.sryang.torang.di.feed_di
 import androidx.compose.runtime.Composable
 import com.sryang.base.feed.compose.feed.Feeds
 import com.sryang.torang.BuildConfig
-import com.sryang.torang.compose.FeedScreen
-import com.sryang.torang.uistate.isEmpty
+import com.sryang.torang.compose.feed.FeedScreen
 
 @Composable
 fun ProvideFeedScreen(
