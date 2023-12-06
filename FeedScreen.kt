@@ -1,9 +1,9 @@
 package com.sryang.torang.di.feed_di
 
 import androidx.compose.runtime.Composable
-import com.sryang.base.feed.compose.feed.Feeds
 import com.sryang.torang.BuildConfig
 import com.sryang.torang.compose.feed.FeedScreen
+import com.sryang.torang.compose.feed.Feeds
 
 @Composable
 fun ProvideFeedScreen(
@@ -21,8 +21,6 @@ fun ProvideFeedScreen(
         clickAddReview = clickAddReview,
     ) { list, onLike, onFavorite, onRefresh, onBottom, isRefreshing, isEmpty ->
         Feeds(
-            profileImageServerUrl = BuildConfig.PROFILE_IMAGE_SERVER_URL,
-            imageServerUrl = BuildConfig.REVIEW_IMAGE_SERVER_URL,
             list = ArrayList(list.map { it.review() }),
             onLike = onLike,
             onFavorite = onFavorite,
