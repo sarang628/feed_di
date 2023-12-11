@@ -1,5 +1,6 @@
 package com.sryang.torang.di.feed_di
 
+import com.sarang.torang.BuildConfig
 import com.sryang.torang.data.basefeed.Restaurant
 import com.sryang.torang.data.basefeed.Review
 import com.sryang.torang.data.basefeed.User
@@ -36,13 +37,13 @@ fun ReviewAndImageEntity.toFeedData(): Feed {
         name = this.review.userName,
         restaurantName = this.review.restaurantName,
         rating = this.review.rating,
-        profilePictureUrl = this.review.profilePicUrl,
+        profilePictureUrl = BuildConfig.PROFILE_IMAGE_SERVER_URL + this.review.profilePicUrl,
         likeAmount = this.review.likeAmount,
         commentAmount = this.review.commentAmount,
         isLike = this.like != null,
         isFavorite = this.favorite != null,
         contents = this.review.contents,
-        reviewImages = this.images.map { it.pictureUrl },
+        reviewImages = this.images.map { BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl },
         restaurantId = this.review.restaurantId
     )
 }

@@ -50,7 +50,7 @@ class FeedServiceModule {
     ): DeleteLikeUseCase {
         return object : DeleteLikeUseCase {
             override suspend fun invoke(reviewId: Int) {
-                feedRepository.deleteFavorite(reviewId)
+                feedRepository.deleteLike(reviewId)
             }
         }
     }
