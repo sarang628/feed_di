@@ -1,7 +1,6 @@
 package com.sryang.torang.di.feed_di
 
 import androidx.compose.runtime.Composable
-import com.sryang.torang.BuildConfig
 import com.sryang.torang.compose.feed.FeedScreen
 import com.sryang.torang.compose.feed.Feeds
 

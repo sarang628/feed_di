@@ -1,6 +1,6 @@
 package com.sryang.torang.di.feed_di
 
-import com.sarang.torang.BuildConfig
+import com.sryang.main.BuildConfig
 import com.sryang.torang.data.basefeed.Restaurant
 import com.sryang.torang.data.basefeed.Review
 import com.sryang.torang.data.basefeed.User
