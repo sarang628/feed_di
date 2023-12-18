@@ -18,7 +18,7 @@ fun ProvideFeedScreen(
 ) {
     FeedScreen(
         clickAddReview = clickAddReview,
-    ) { list, onLike, onFavorite, onRefresh, onBottom, isRefreshing, isEmpty ->
+    ) { list, onLike, onFavorite, onRefresh, onBottom, isRefreshing, isEmpty, isLoading ->
         Feeds(
             list = ArrayList(list.map { it.review() }),
             onLike = onLike,
@@ -35,6 +35,7 @@ fun ProvideFeedScreen(
             ratingBar = ratingBar,
             isRefreshing = isRefreshing,
             isEmpty = isEmpty,
+            isLoading = isLoading
         )
     }
 }
