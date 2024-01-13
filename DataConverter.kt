@@ -1,5 +1,6 @@
 package com.sryang.torang.di.feed_di
 
+import android.util.Log
 import com.sryang.torang.BuildConfig
 import com.sryang.torang.data.basefeed.Restaurant
 import com.sryang.torang.data.basefeed.Review
@@ -7,6 +8,7 @@ import com.sryang.torang.data.basefeed.User
 import com.sryang.torang.data.feed.Feed
 import com.sryang.torang_repository.data.entity.ReviewAndImageEntity
 
+const val TAG = "_DataConverter"
 fun Feed.review(): Review {
     return Review(
         reviewId = this.reviewId,
@@ -26,7 +28,16 @@ fun Feed.review(): Review {
         comments = null,
         isLike = this.isLike,
         isFavorite = this.isFavorite,
-        contents = this.contents
+        contents = this.contents,
+        onComment = { onComment?.invoke() },
+        onFavorite = { onFavorite?.invoke() },
+        onImage = { onImage?.invoke(it) },
+        onLike = { onLike?.invoke() },
+        onMenu = { onMenu?.invoke() },
+        onName = { onName?.invoke() },
+        onProfile = { onProfile?.invoke() },
+        onRestaurant = { onRestaurant?.invoke() },
+        onShare = { onShare?.invoke() }
     )
 }
 
@@ -44,6 +55,6 @@ fun ReviewAndImageEntity.toFeedData(): Feed {
         isFavorite = this.favorite != null,
         contents = this.review.contents,
         reviewImages = this.images.map { BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl },
-        restaurantId = this.review.restaurantId
+        restaurantId = this.review.restaurantId,
     )
 }
