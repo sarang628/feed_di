@@ -28,16 +28,7 @@ fun Feed.review(): Review {
         comments = null,
         isLike = this.isLike,
         isFavorite = this.isFavorite,
-        contents = this.contents,
-        onComment = { onComment?.invoke() },
-        onFavorite = { onFavorite?.invoke() },
-        onImage = { onImage?.invoke(it) },
-        onLike = { onLike?.invoke() },
-        onMenu = { onMenu?.invoke() },
-        onName = { onName?.invoke() },
-        onProfile = { onProfile?.invoke() },
-        onRestaurant = { onRestaurant?.invoke() },
-        onShare = { onShare?.invoke() }
+        contents = this.contents
     )
 }
 
@@ -55,6 +46,6 @@ fun ReviewAndImageEntity.toFeedData(): Feed {
         isFavorite = this.favorite != null,
         contents = this.review.contents,
         reviewImages = this.images.map { BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl },
-        restaurantId = this.review.restaurantId,
+        restaurantId = this.review.restaurantId
     )
 }
