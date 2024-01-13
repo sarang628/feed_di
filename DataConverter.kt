@@ -1,6 +1,5 @@
 package com.sryang.torang.di.feed_di
 
-import android.util.Log
 import com.sryang.torang.BuildConfig
 import com.sryang.torang.data.basefeed.Restaurant
 import com.sryang.torang.data.basefeed.Review

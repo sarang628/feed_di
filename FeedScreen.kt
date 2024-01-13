@@ -7,11 +7,11 @@ import com.sryang.torang.uistate.FeedsUiState
 
 @Composable
 fun ProvideFeedScreen(
-    clickAddReview: (() -> Unit),
+    onAddReview: (() -> Unit),
     ratingBar: @Composable (Float) -> Unit
 ) {
     FeedScreen(
-        clickAddReview = clickAddReview,
+        onAddReview = onAddReview,
     ) { list,  onRefresh, onBottom, isRefreshing ->
         Feeds(
             onRefresh = onRefresh,
