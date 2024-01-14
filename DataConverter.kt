@@ -8,7 +8,15 @@ import com.sryang.torang.data.feed.Feed
 import com.sryang.torang_repository.data.entity.ReviewAndImageEntity
 
 const val TAG = "_DataConverter"
-fun Feed.review(): Review {
+fun Feed.review(
+    onComment: (() -> Unit)? = null,
+    onShare: (() -> Unit)? = null,
+    onMenu: (() -> Unit)? = null,
+    onName: (() -> Unit)? = null,
+    onRestaurant: (() -> Unit)? = null,
+    onImage: ((Int) -> Unit)? = null,
+    onProfile: (() -> Unit)? = null,
+): Review {
     return Review(
         reviewId = this.reviewId,
         reviewImages = this.reviewImages,
@@ -27,7 +35,16 @@ fun Feed.review(): Review {
         comments = null,
         isLike = this.isLike,
         isFavorite = this.isFavorite,
-        contents = this.contents
+        contents = this.contents,
+        onComment = onComment,
+        onShare = onShare,
+        onMenu = onMenu,
+        onName = onName,
+        onRestaurant = onRestaurant,
+        onImage = onImage,
+        onProfile = onProfile,
+        onLike = onLike,
+        onFavorite = onFavorite
     )
 }
 
