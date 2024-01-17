@@ -3,7 +3,7 @@ package com.sarang.torang.di.feed_di
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.sryang.torang.compose.feed.FeedScreen
+import com.sarang.torang.compose.feed.FeedScreen
 import com.sryang.torang.compose.feed.Feeds
 import com.sryang.torang.uistate.FeedsUiState
 

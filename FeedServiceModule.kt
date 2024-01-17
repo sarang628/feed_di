@@ -1,12 +1,12 @@
 package com.sarang.torang.di.feed_di
 
-import com.sryang.torang.data.feed.Feed
-import com.sryang.torang.usecase.AddFavoriteUseCase
-import com.sryang.torang.usecase.AddLikeUseCase
-import com.sryang.torang.usecase.DeleteFavoriteUseCase
-import com.sryang.torang.usecase.DeleteLikeUseCase
-import com.sryang.torang.usecase.FeedRefreshUseCase
-import com.sryang.torang.usecase.GetFeedFlowUseCase
+import com.sarang.torang.data.feed.Feed
+import com.sarang.torang.usecase.AddFavoriteUseCase
+import com.sarang.torang.usecase.AddLikeUseCase
+import com.sarang.torang.usecase.DeleteFavoriteUseCase
+import com.sarang.torang.usecase.DeleteLikeUseCase
+import com.sarang.torang.usecase.FeedRefreshUseCase
+import com.sarang.torang.usecase.GetFeedFlowUseCase
 import com.sryang.torang_repository.repository.FeedRepository
 import dagger.Module
 import dagger.Provides
