@@ -1,4 +1,4 @@
-package com.sryang.torang.di.feed_di
+package com.sarang.torang.di.feed_di
 
 import android.util.Log
 import androidx.compose.runtime.Composable

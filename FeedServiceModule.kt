@@ -1,4 +1,4 @@
-package com.sryang.torang.di.feed_di
+package com.sarang.torang.di.feed_di
 
 import com.sryang.torang.data.feed.Feed
 import com.sryang.torang.usecase.AddFavoriteUseCase
