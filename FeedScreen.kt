@@ -2,6 +2,7 @@ package com.sryang.torang.di.feed_di
 
 import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.sryang.torang.compose.feed.FeedScreen
 import com.sryang.torang.compose.feed.Feeds
 import com.sryang.torang.uistate.FeedsUiState
@@ -9,7 +10,7 @@ import com.sryang.torang.uistate.FeedsUiState
 @Composable
 fun ProvideFeedScreen(
     onAddReview: (() -> Unit),
-    ratingBar: @Composable (Float) -> Unit
+    ratingBar: @Composable (Modifier, Float) -> Unit
 ) {
     val TAG = "_ProvideFeedScreen"
     FeedScreen(
@@ -18,7 +19,7 @@ fun ProvideFeedScreen(
             Feeds(
                 onRefresh = onRefresh,
                 onBottom = onBottom,
-                ratingBar = { _, _ -> ratingBar },
+                ratingBar = { modifier, float -> ratingBar(modifier, float) },
                 isRefreshing = isRefreshing,
                 feedsUiState = FeedsUiState.Success(
                     list.map {
