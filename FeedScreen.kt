@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.sarang.torang.compose.feed.FeedScreen
-import com.sryang.torang.compose.feed.Feeds
-import com.sryang.torang.uistate.FeedsUiState
+import com.sarang.torang.compose.feed.Feeds
+import com.sarang.torang.uistate.FeedsUiState
 
 @Composable
 fun ProvideFeedScreen(

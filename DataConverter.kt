@@ -1,9 +1,9 @@
 package com.sarang.torang.di.feed_di
 
 import com.sarang.torang.BuildConfig
-import com.sryang.torang.data.basefeed.Restaurant
-import com.sryang.torang.data.basefeed.Review
-import com.sryang.torang.data.basefeed.User
+import com.sarang.torang.data.basefeed.Restaurant
+import com.sarang.torang.data.basefeed.Review
+import com.sarang.torang.data.basefeed.User
 import com.sarang.torang.data.feed.Feed
 import com.sryang.torang_repository.data.entity.ReviewAndImageEntity
 
