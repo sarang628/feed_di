@@ -19,7 +19,6 @@ fun ProvideFeedScreen(
             Feeds(
                 onRefresh = onRefresh,
                 onBottom = onBottom,
-                ratingBar = { modifier, float -> ratingBar(modifier, float) },
                 isRefreshing = isRefreshing,
                 feedsUiState = FeedsUiState.Success(
                     list.map {

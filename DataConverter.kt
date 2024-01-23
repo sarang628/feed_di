@@ -44,7 +44,8 @@ fun Feed.review(
         onImage = onImage,
         onProfile = onProfile,
         onLike = onLike,
-        onFavorite = onFavorite
+        onFavorite = onFavorite,
+        createDate =  createDate
     )
 }
 
@@ -62,6 +63,7 @@ fun ReviewAndImageEntity.toFeedData(): Feed {
         isFavorite = this.favorite != null,
         contents = this.review.contents,
         reviewImages = this.images.map { BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl },
-        restaurantId = this.review.restaurantId
+        restaurantId = this.review.restaurantId,
+        createDate = this.review.createDate
     )
 }
