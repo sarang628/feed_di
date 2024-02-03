@@ -7,7 +7,7 @@ import com.sarang.torang.usecase.DeleteFavoriteUseCase
 import com.sarang.torang.usecase.DeleteLikeUseCase
 import com.sarang.torang.usecase.FeedRefreshUseCase
 import com.sarang.torang.usecase.GetFeedFlowUseCase
-import com.sryang.torang_repository.repository.FeedRepository
+import com.sarang.torang.repository.FeedRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
