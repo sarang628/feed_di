@@ -4,8 +4,8 @@ import com.sarang.torang.BuildConfig
 import com.sarang.torang.data.basefeed.Restaurant
 import com.sarang.torang.data.basefeed.Review
 import com.sarang.torang.data.basefeed.User
-import com.sarang.torang.data.feed.Feed
 import com.sarang.torang.data.entity.ReviewAndImageEntity
+import com.sarang.torang.data.feed.Feed
 
 const val TAG = "_DataConverter"
 fun Feed.review(
