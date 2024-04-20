@@ -54,7 +54,7 @@ fun ReviewAndImageEntity.toFeedData(): Feed {
         reviewId = this.review.reviewId,
         userId = this.review.userId,
         name = this.review.userName,
-        restaurantName = this.review.restaurantName,
+        restaurantName = this.review.restaurantName ?: "",
         rating = this.review.rating,
         profilePictureUrl = BuildConfig.PROFILE_IMAGE_SERVER_URL + this.review.profilePicUrl,
         likeAmount = this.review.likeAmount,
@@ -63,7 +63,7 @@ fun ReviewAndImageEntity.toFeedData(): Feed {
         isFavorite = this.favorite != null,
         contents = this.review.contents,
         reviewImages = this.images.map { BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl },
-        restaurantId = this.review.restaurantId,
+        restaurantId = this.review.restaurantId ?: -1,
         createDate = this.review.createDate
     )
 }
