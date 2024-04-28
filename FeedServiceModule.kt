@@ -8,6 +8,7 @@ import com.sarang.torang.usecase.DeleteFavoriteUseCase
 import com.sarang.torang.usecase.DeleteLikeUseCase
 import com.sarang.torang.usecase.FeedRefreshUseCase
 import com.sarang.torang.usecase.GetFeedFlowUseCase
+import com.sarang.torang.usecase.GetMyFeedFlowUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -82,6 +83,19 @@ class FeedServiceModule {
         feedRepository: FeedRepository
     ): GetFeedFlowUseCase {
         return object : GetFeedFlowUseCase {
+            override suspend fun invoke(): Flow<List<Feed>> {
+                return feedRepository.feeds.map {
+                    it.map { it.toFeedData() }
+                }
+            }
+        }
+    }
+
+    @Provides
+    fun provideGetMyFeedFlowUseCase(
+        feedRepository: FeedRepository
+    ): GetMyFeedFlowUseCase {
+        return object : GetMyFeedFlowUseCase {
             override suspend fun invoke(): Flow<List<Feed>> {
                 return feedRepository.feeds.map {
                     it.map { it.toFeedData() }
