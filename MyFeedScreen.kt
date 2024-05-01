@@ -24,7 +24,7 @@ fun ProvideMyFeedScreen(
         onAddReview = onAddReview,
         reviewId = reviewId,
         onBack = onBack,
-        scrollState = listState,
+        listState = listState,
         feeds = { feedUiState, onRefresh, onBottom, isRefreshing ->
             when (feedUiState) {
                 is FeedUiState.Loading -> {
