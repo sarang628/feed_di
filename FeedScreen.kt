@@ -1,5 +1,6 @@
 package com.sarang.torang.di.feed_di
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,10 +19,12 @@ import com.sarang.torang.uistate.FeedsUiState
 fun ProvideFeedScreen(
     onAddReview: (() -> Unit),
     progressTintColor: Color? = null,
+    listState: LazyListState
 ) {
     var scrollEnabled by remember { mutableStateOf(true) }
     MainFeedScreen(
         onAddReview = onAddReview,
+        listState = listState,
         feed = {
             Feed(
                 review = it.review { },
