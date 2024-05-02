@@ -2,7 +2,7 @@ package com.sarang.torang.di.feed_di
 
 import android.util.Log
 import androidx.compose.runtime.Composable
-import com.sarang.torang.compose.feed.FeedScreen
+import com.sarang.torang.compose.feed.MainFeedScreen
 import com.sarang.torang.compose.feed.Feeds
 import com.sarang.torang.uistate.FeedUiState
 import com.sarang.torang.uistate.FeedUiState.Error
@@ -14,7 +14,7 @@ fun ProvideFeedScreen(
     onAddReview: (() -> Unit),
 ) {
     val TAG = "_ProvideFeedScreen"
-    FeedScreen(
+    MainFeedScreen(
         onAddReview = onAddReview,
         feeds = { feedUiState, onRefresh, onBottom, isRefreshing ->
             when (feedUiState) {
