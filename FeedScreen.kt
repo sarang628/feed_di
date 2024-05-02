@@ -18,7 +18,6 @@ import com.sarang.torang.uistate.FeedsUiState
 fun ProvideFeedScreen(
     onAddReview: (() -> Unit),
     progressTintColor: Color? = null,
-    listState: LazyListState
     onComment: ((Int) -> Unit)? = null,
     onShare: ((Int) -> Unit)? = null,
     onMenu: ((Int) -> Unit)? = null,
@@ -30,7 +29,6 @@ fun ProvideFeedScreen(
     var scrollEnabled by remember { mutableStateOf(true) }
     MainFeedScreen(
         onAddReview = onAddReview,
-        listState = listState,
         feed = {
             Feed(
                 review = it.review(
