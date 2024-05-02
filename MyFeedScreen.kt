@@ -15,6 +15,13 @@ fun ProvideMyFeedScreen(
     reviewId: Int,
     onBack: (() -> Unit)? = null,
     progressTintColor: Color? = null,
+    onComment: ((Int) -> Unit)? = null,
+    onShare: ((Int) -> Unit)? = null,
+    onMenu: ((Int) -> Unit)? = null,
+    onName: ((Int) -> Unit)? = null,
+    onRestaurant: ((Int) -> Unit)? = null,
+    onImage: ((Int) -> Unit)? = null,
+    onProfile: ((Int) -> Unit)? = null,
 ) {
     val listState = rememberLazyListState()
     var scrollEnabled by remember { mutableStateOf(true) }
@@ -25,7 +32,13 @@ fun ProvideMyFeedScreen(
         listState = listState,
         feed = {
             Feed(
-                review = it.review { },
+                review = it.review(onComment = { onComment?.invoke(it.reviewId) },
+                    onShare = { onShare?.invoke(it.reviewId) },
+                    onMenu = { onMenu?.invoke(it.reviewId) },
+                    onName = { onName?.invoke(it.userId) },
+                    onRestaurant = { onRestaurant?.invoke(it.restaurantId) },
+                    onImage = onImage,
+                    onProfile = { onProfile?.invoke(it.userId) }),
                 isZooming = { scrollEnabled = !it },
                 progressTintColor = progressTintColor
             )
