@@ -7,22 +7,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavHostController
 import com.sarang.torang.compose.feed.Feed
 import com.sarang.torang.compose.feed.MyFeedScreen
 
-@Composable
-fun ProvideMyFeedScreen(
+fun provideMyFeedScreen(
+    navController: NavHostController,
     reviewId: Int,
     onBack: (() -> Unit)? = null,
     progressTintColor: Color? = null,
-    onComment: ((Int) -> Unit)? = null,
-    onShare: ((Int) -> Unit)? = null,
-    onMenu: ((Int) -> Unit)? = null,
-    onName: ((Int) -> Unit)? = null,
-    onRestaurant: ((Int) -> Unit)? = null,
     onImage: ((Int) -> Unit)? = null,
-    onProfile: ((Int) -> Unit)? = null,
-) {
+    onShowComment: () -> Unit,
+) : @Composable (onComment: ((Int) -> Unit), onMenu: ((Int) -> Unit), onShare: ((Int) -> Unit)) -> Unit = { onComment, onMenu, onShare ->
     val listState = rememberLazyListState()
     var scrollEnabled by remember { mutableStateOf(true) }
 
@@ -32,13 +28,16 @@ fun ProvideMyFeedScreen(
         listState = listState,
         feed = {
             Feed(
-                review = it.review(onComment = { onComment?.invoke(it.reviewId) },
-                    onShare = { onShare?.invoke(it.reviewId) },
-                    onMenu = { onMenu?.invoke(it.reviewId) },
-                    onName = { onName?.invoke(it.userId) },
-                    onRestaurant = { onRestaurant?.invoke(it.restaurantId) },
+                review = it.review(onComment = {
+                    onComment.invoke(it.reviewId)
+                    onShowComment.invoke()
+                                               },
+                    onShare = { onShare.invoke(it.reviewId) },
+                    onMenu = { onMenu.invoke(it.reviewId) },
+                    onName = { navController.navigate("profile/${it.userId}") },
+                    onRestaurant = { navController.navigate("restaurant/${it.restaurantId}") },
                     onImage = onImage,
-                    onProfile = { onProfile?.invoke(it.userId) }),
+                    onProfile = { navController.navigate("profile/${it.userId}") }),
                 isZooming = { scrollEnabled = !it },
                 progressTintColor = progressTintColor
             )
