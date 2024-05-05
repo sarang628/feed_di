@@ -14,7 +14,6 @@ import com.sarang.torang.compose.feed.MyFeedScreen
 fun provideMyFeedScreen(
     navController: NavHostController,
     reviewId: Int,
-    onBack: (() -> Unit)? = null,
     progressTintColor: Color? = null,
     onImage: ((Int) -> Unit)? = null,
     onShowComment: () -> Unit,
@@ -24,7 +23,7 @@ fun provideMyFeedScreen(
 
     MyFeedScreen(
         reviewId = reviewId,
-        onBack = onBack,
+        onBack = { navController.popBackStack() },
         listState = listState,
         feed = {
             Feed(
