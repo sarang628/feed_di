@@ -15,12 +15,13 @@ fun provideFeedScreen(
     navController: NavHostController,
     progressTintColor: Color? = null,
     onImage: ((Int) -> Unit)? = null,
+    onAddReview: () -> Unit,
     onShowComment: () -> Unit,
 ): @Composable (onComment: ((Int) -> Unit), onMenu: ((Int) -> Unit), onShare: ((Int) -> Unit)) -> Unit =
     { onComment, onMenu, onShare ->
         var scrollEnabled by remember { mutableStateOf(true) }
         MainFeedScreen(
-            onAddReview = { navController.navigate("addReview") },
+            onAddReview = onAddReview,
             feed = {
                 Feed(
                     review = it.review(

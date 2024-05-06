@@ -17,29 +17,32 @@ fun provideMyFeedScreen(
     progressTintColor: Color? = null,
     onImage: ((Int) -> Unit)? = null,
     onShowComment: () -> Unit,
-) : @Composable (onComment: ((Int) -> Unit), onMenu: ((Int) -> Unit), onShare: ((Int) -> Unit)) -> Unit = { onComment, onMenu, onShare ->
-    val listState = rememberLazyListState()
-    var scrollEnabled by remember { mutableStateOf(true) }
+    onProfile: ((Int) -> Unit)? = null,
+    onBack: (() -> Unit)? = null
+): @Composable (onComment: ((Int) -> Unit), onMenu: ((Int) -> Unit), onShare: ((Int) -> Unit)) -> Unit =
+    { onComment, onMenu, onShare ->
+        val listState = rememberLazyListState()
+        var scrollEnabled by remember { mutableStateOf(true) }
 
-    MyFeedScreen(
-        reviewId = reviewId,
-        onBack = { navController.popBackStack() },
-        listState = listState,
-        feed = {
-            Feed(
-                review = it.review(onComment = {
-                    onComment.invoke(it.reviewId)
-                    onShowComment.invoke()
-                                               },
-                    onShare = { onShare.invoke(it.reviewId) },
-                    onMenu = { onMenu.invoke(it.reviewId) },
-                    onName = { navController.navigate("profile/${it.userId}") },
-                    onRestaurant = { navController.navigate("restaurant/${it.restaurantId}") },
-                    onImage = onImage,
-                    onProfile = { navController.navigate("profile/${it.userId}") }),
-                isZooming = { scrollEnabled = !it },
-                progressTintColor = progressTintColor
-            )
-        }
-    )
-}
+        MyFeedScreen(
+            reviewId = reviewId,
+            onBack = onBack,
+            listState = listState,
+            feed = {
+                Feed(
+                    review = it.review(onComment = {
+                        onComment.invoke(it.reviewId)
+                        onShowComment.invoke()
+                    },
+                        onShare = { onShare.invoke(it.reviewId) },
+                        onMenu = { onMenu.invoke(it.reviewId) },
+                        onName = { navController.navigate("profile/${it.userId}") },
+                        onRestaurant = { navController.navigate("restaurant/${it.restaurantId}") },
+                        onImage = onImage,
+                        onProfile = { onProfile?.invoke(it.userId) }),
+                    isZooming = { scrollEnabled = !it },
+                    progressTintColor = progressTintColor
+                )
+            }
+        )
+    }
