@@ -25,18 +25,22 @@ fun ProvideFeedScreen(
     onRestaurant: ((Int) -> Unit)? = null,
     onImage: ((Int) -> Unit)? = null,
     onProfile: ((Int) -> Unit)? = null,
+    onTop: Boolean,
+    consumeOnTop: () -> Unit
 ) {
     var scrollEnabled by remember { mutableStateOf(true) }
     MainFeedScreen(
         onAddReview = onAddReview,
+        onTop = onTop,
+        consumeOnTop = consumeOnTop,
         feed = {
             Feed(
                 review = it.review(
-                    onComment = {onComment?.invoke(it.reviewId)},
+                    onComment = { onComment?.invoke(it.reviewId) },
                     onShare = { onShare?.invoke(it.reviewId) },
                     onMenu = { onMenu?.invoke(it.reviewId) },
                     onName = { onName?.invoke(it.userId) },
-                    onRestaurant = {onRestaurant?.invoke(it.restaurantId)},
+                    onRestaurant = { onRestaurant?.invoke(it.restaurantId) },
                     onImage = onImage,
                     onProfile = { onProfile?.invoke(it.userId) }
                 ),
