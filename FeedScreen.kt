@@ -1,44 +1,58 @@
 package com.sarang.torang.di.feed_di
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.sarang.torang.compose.ProfileScreenNavHost
 import com.sarang.torang.compose.feed.Feed
-import com.sarang.torang.compose.feed.Feeds
 import com.sarang.torang.compose.feed.MainFeedScreen
-import com.sarang.torang.uistate.FeedUiState
-import com.sarang.torang.uistate.FeedUiState.Error
-import com.sarang.torang.uistate.FeedUiState.Success
-import com.sarang.torang.uistate.FeedsUiState
+import com.sarang.torang.di.main_di.ProvideMyFeedScreen
+import kotlinx.coroutines.launch
 
-@Composable
-fun ProvideFeedScreen(
+fun provideFeedScreen(
     navController: NavHostController,
     progressTintColor: Color? = null,
     onImage: ((Int) -> Unit)? = null,
     onAddReview: () -> Unit,
     onShowComment: () -> Unit,
-    onTop: Boolean,
-    consumeOnTop: () -> Unit
-): @Composable (onComment: ((Int) -> Unit), onMenu: ((Int) -> Unit), onShare: ((Int) -> Unit)) -> Unit =
-    { onComment, onMenu, onShare ->
+    currentBottomMenu: String,
+    onConsumeCurrentBottomMenu: () -> Unit
+): @Composable (onComment: ((Int) -> Unit), onMenu: ((Int) -> Unit), onShare: ((Int) -> Unit), navBackStackEntry: NavBackStackEntry) -> Unit =
+    { onComment, onMenu, onShare, navBackStackEntry ->
         var scrollEnabled by remember { mutableStateOf(true) }
         val mainNavHostController = rememberNavController()
+        var onTop by remember { mutableStateOf(false) }
+
+        LaunchedEffect(key1 = currentBottomMenu) {
+            if (currentBottomMenu == "feed") {
+
+                if (mainNavHostController.currentDestination?.route != "mainFeed") {
+                    mainNavHostController.popBackStack("mainFeed", inclusive = false)
+                } else {
+                    onTop = true
+                }
+
+                onConsumeCurrentBottomMenu.invoke()
+            }
+        }
 
         NavHost(navController = mainNavHostController, startDestination = "mainFeed") {
             composable("mainFeed") {
                 MainFeedScreen(
                     onAddReview = onAddReview,
                     onTop = onTop,
-                    consumeOnTop = consumeOnTop,
+                    consumeOnTop = { onTop = false },
                     feed = {
                         Feed(
                             review = it.review(
