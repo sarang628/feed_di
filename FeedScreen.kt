@@ -18,12 +18,66 @@ import com.sarang.torang.uistate.FeedsUiState
 fun ProvideFeedScreen(
     onAddReview: (() -> Unit),
     progressTintColor: Color? = null,
-    onComment: ((Int) -> Unit)? = null,
-    onShare: ((Int) -> Unit)? = null,
-    onMenu: ((Int) -> Unit)? = null,
-    onName: ((Int) -> Unit)? = null,
-    onRestaurant: ((Int) -> Unit)? = null,
     onImage: ((Int) -> Unit)? = null,
+    onAddReview: () -> Unit,
+    onShowComment: () -> Unit
+): @Composable (onComment: ((Int) -> Unit), onMenu: ((Int) -> Unit), onShare: ((Int) -> Unit)) -> Unit =
+    { onComment, onMenu, onShare ->
+        var scrollEnabled by remember { mutableStateOf(true) }
+
+        val mainNavHostController = rememberNavController()
+        NavHost(navController = mainNavHostController, startDestination = "mainFeed") {
+            composable("mainFeed") {
+                MainFeedScreen(
+                    onAddReview = onAddReview,
+                    feed = {
+                        Feed(
+                            review = it.review(
+                                onComment = {
+                                    onComment.invoke(it.reviewId)
+                                    onShowComment.invoke()
+                                },
+                                onShare = { onShare.invoke(it.reviewId) },
+                                onMenu = { onMenu.invoke(it.reviewId) },
+                                onName = { mainNavHostController.navigate("profile/${it.userId}") },
+                                onRestaurant = { navController.navigate("restaurant/${it.restaurantId}") },
+                                onImage = onImage,
+                                onProfile = { mainNavHostController.navigate("profile/${it.userId}") }
+                            ),
+                            isZooming = { scrollEnabled = !it },
+                            progressTintColor = progressTintColor
+                        )
+                    }
+                )
+            }
+            composable("profile/{id}") {
+                val userId = it.arguments?.getString("id")?.toInt()
+                ProfileScreenNavHost(
+                    id = userId,
+                    onClose = { mainNavHostController.popBackStack() },
+                    onEmailLogin = { navController.navigate("emailLogin") },
+                    onReview = { mainNavHostController.navigate("myFeed/${it}") },
+                    myFeed = {
+                        ProvideMyFeedScreen(/*ProfileScreenNavHost*/
+                            navController = navController,
+                            reviewId = it.arguments?.getString("reviewId")?.toInt() ?: 0,
+                            onEdit = { navController.navigate("modReview/${it}") },
+                            onProfile = { mainNavHostController.navigate("profile/${it}") },
+                            onBack = { mainNavHostController.popBackStack() }
+                        )
+                    })
+            }
+            composable("myFeed/{reviewId}") {
+                ProvideMyFeedScreen(/*provideFeedScreen*/
+                    navController = navController,
+                    reviewId = it.arguments?.getString("reviewId")?.toInt() ?: 0,
+                    onEdit = { navController.navigate("modReview/${it}") },
+                    onProfile = { mainNavHostController.navigate("profile/${it}") },
+                    onBack = { mainNavHostController.popBackStack() }
+                )
+            }
+        }
+    }
     onProfile: ((Int) -> Unit)? = null,
     onTop: Boolean,
     consumeOnTop: () -> Unit
