@@ -12,13 +12,15 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.sarang.torang.compose.ProfileScreenNavHost
 import com.sarang.torang.compose.feed.Feed
 import com.sarang.torang.compose.feed.MainFeedScreen
 import com.sarang.torang.di.main_di.ProvideMyFeedScreen
-import kotlinx.coroutines.launch
+import com.sarang.torang.uistate.FeedUiState
+import com.sarang.torang.uistate.FeedUiState.Error
+import com.sarang.torang.uistate.FeedUiState.Success
+import com.sarang.torang.uistate.FeedsUiState
 
 fun provideFeedScreen(
     navController: NavHostController,
