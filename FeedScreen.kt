@@ -6,6 +6,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.sarang.torang.compose.feed.Feed
 import com.sarang.torang.compose.feed.Feeds
 import com.sarang.torang.compose.feed.MainFeedScreen
@@ -16,20 +21,24 @@ import com.sarang.torang.uistate.FeedsUiState
 
 @Composable
 fun ProvideFeedScreen(
-    onAddReview: (() -> Unit),
+    navController: NavHostController,
     progressTintColor: Color? = null,
     onImage: ((Int) -> Unit)? = null,
     onAddReview: () -> Unit,
-    onShowComment: () -> Unit
+    onShowComment: () -> Unit,
+    onTop: Boolean,
+    consumeOnTop: () -> Unit
 ): @Composable (onComment: ((Int) -> Unit), onMenu: ((Int) -> Unit), onShare: ((Int) -> Unit)) -> Unit =
     { onComment, onMenu, onShare ->
         var scrollEnabled by remember { mutableStateOf(true) }
-
         val mainNavHostController = rememberNavController()
+
         NavHost(navController = mainNavHostController, startDestination = "mainFeed") {
             composable("mainFeed") {
                 MainFeedScreen(
                     onAddReview = onAddReview,
+                    onTop = onTop,
+                    consumeOnTop = consumeOnTop,
                     feed = {
                         Feed(
                             review = it.review(
@@ -78,29 +87,3 @@ fun ProvideFeedScreen(
             }
         }
     }
-    onProfile: ((Int) -> Unit)? = null,
-    onTop: Boolean,
-    consumeOnTop: () -> Unit
-) {
-    var scrollEnabled by remember { mutableStateOf(true) }
-    MainFeedScreen(
-        onAddReview = onAddReview,
-        onTop = onTop,
-        consumeOnTop = consumeOnTop,
-        feed = {
-            Feed(
-                review = it.review(
-                    onComment = { onComment?.invoke(it.reviewId) },
-                    onShare = { onShare?.invoke(it.reviewId) },
-                    onMenu = { onMenu?.invoke(it.reviewId) },
-                    onName = { onName?.invoke(it.userId) },
-                    onRestaurant = { onRestaurant?.invoke(it.restaurantId) },
-                    onImage = onImage,
-                    onProfile = { onProfile?.invoke(it.userId) }
-                ),
-                isZooming = { scrollEnabled = !it },
-                progressTintColor = progressTintColor
-            )
-        }
-    )
-}
