@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import com.sarang.torang.compose.feed.Feed
 import com.sarang.torang.compose.feed.MyFeedScreen
+import com.sarang.torang.di.image.provideTorangAsyncImage
 
 fun provideMyFeedScreen(
     navController: NavHostController,
@@ -41,7 +42,8 @@ fun provideMyFeedScreen(
                         onImage = onImage,
                         onProfile = { onProfile?.invoke(it.userId) }),
                     isZooming = { scrollEnabled = !it },
-                    progressTintColor = progressTintColor
+                    progressTintColor = progressTintColor,
+                    image = provideTorangAsyncImage()
                 )
             }
         )
