@@ -18,8 +18,9 @@ fun provideMyFeedScreen(
     progressTintColor: Color? = null,
     onImage: ((Int) -> Unit)? = null,
     onShowComment: () -> Unit,
+    onRestaurant: (Int) -> Unit,
     onProfile: ((Int) -> Unit)? = null,
-    onBack: (() -> Unit)? = null
+    onBack: (() -> Unit)? = null,
 ): @Composable (onComment: ((Int) -> Unit), onMenu: ((Int) -> Unit), onShare: ((Int) -> Unit)) -> Unit =
     { onComment, onMenu, onShare ->
         val listState = rememberLazyListState()
@@ -37,8 +38,8 @@ fun provideMyFeedScreen(
                     },
                         onShare = { onShare.invoke(it.reviewId) },
                         onMenu = { onMenu.invoke(it.reviewId) },
-                        onName = { navController.navigate("profile/${it.userId}") },
-                        onRestaurant = { navController.navigate("restaurant/${it.restaurantId}") },
+                        onName = { onProfile?.invoke(it.userId) },
+                        onRestaurant = {onRestaurant.invoke(it.restaurantId)},
                         onImage = onImage,
                         onProfile = { onProfile?.invoke(it.userId) }),
                     isZooming = { scrollEnabled = !it },
