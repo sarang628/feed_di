@@ -14,7 +14,6 @@ fun Feed.review(
     onMenu: (() -> Unit)? = null,
     onName: (() -> Unit)? = null,
     onRestaurant: (() -> Unit)? = null,
-    onImage: ((Int) -> Unit)? = null,
     onProfile: (() -> Unit)? = null,
 ): Review {
     return Review(
@@ -41,7 +40,6 @@ fun Feed.review(
         onMenu = onMenu,
         onName = onName,
         onRestaurant = onRestaurant,
-        onImage = onImage,
         onProfile = onProfile,
         onLike = onLike,
         onFavorite = onFavorite,
