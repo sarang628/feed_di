@@ -41,7 +41,6 @@ fun Feed.review(
         onMenu = onMenu,
         onName = onName,
         onRestaurant = onRestaurant,
-        onImage = onImage,
         onProfile = onProfile,
         onLike = onLike,
         onFavorite = onFavorite,
