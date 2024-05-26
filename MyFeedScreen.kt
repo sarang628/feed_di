@@ -6,20 +6,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
-import androidx.navigation.NavHostController
-import com.sarang.torang.compose.feed.Feed
 import com.sarang.torang.compose.feed.MyFeedScreen
-import com.sarang.torang.di.image.provideTorangAsyncImage
+import com.sarang.torang.data.feed.Feed
 
 fun provideMyFeedScreen(
-    navController: NavHostController,
     reviewId: Int,
-    progressTintColor: Color? = null,
-    onImage: ((Int) -> Unit)? = null,
-    onShowComment: () -> Unit,
-    onProfile: ((Int) -> Unit)? = null,
-    onBack: (() -> Unit)? = null
+    onBack: (() -> Unit)? = null,
+    feed: @Composable ((Feed) -> Unit)? = null,
 ): @Composable (onComment: ((Int) -> Unit), onMenu: ((Int) -> Unit), onShare: ((Int) -> Unit)) -> Unit =
     { onComment, onMenu, onShare ->
         val listState = rememberLazyListState()
@@ -29,22 +22,6 @@ fun provideMyFeedScreen(
             reviewId = reviewId,
             onBack = onBack,
             listState = listState,
-            feed = {
-                Feed(
-                    review = it.review(onComment = {
-                        onComment.invoke(it.reviewId)
-                        onShowComment.invoke()
-                    },
-                        onShare = { onShare.invoke(it.reviewId) },
-                        onMenu = { onMenu.invoke(it.reviewId) },
-                        onName = { navController.navigate("profile/${it.userId}") },
-                        onRestaurant = { navController.navigate("restaurant/${it.restaurantId}") },
-                        onImage = onImage,
-                        onProfile = { onProfile?.invoke(it.userId) }),
-                    isZooming = { scrollEnabled = !it },
-                    progressTintColor = progressTintColor,
-                    image = provideTorangAsyncImage()
-                )
-            }
+            feed = feed
         )
     }
