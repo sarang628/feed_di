@@ -1,5 +1,6 @@
 package com.sarang.torang.di.feed_di
 
+import android.util.Log
 import com.sarang.torang.data.feed.Feed
 import com.sarang.torang.repository.FeedRepository
 import com.sarang.torang.usecase.AddFavoriteUseCase
@@ -7,6 +8,7 @@ import com.sarang.torang.usecase.AddLikeUseCase
 import com.sarang.torang.usecase.DeleteFavoriteUseCase
 import com.sarang.torang.usecase.DeleteLikeUseCase
 import com.sarang.torang.usecase.FeedRefreshUseCase
+import com.sarang.torang.usecase.GetFeedByRestaurantIdFlowUseCase
 import com.sarang.torang.usecase.GetFeedFlowUseCase
 import com.sarang.torang.usecase.GetMyFeedFlowUseCase
 import dagger.Module
@@ -25,7 +27,7 @@ import kotlinx.coroutines.flow.map
 class FeedServiceModule {
     @Provides
     fun provideFeedRefreshUseCase(
-        feedRepository: FeedRepository
+        feedRepository: FeedRepository,
     ): FeedRefreshUseCase {
         return object : FeedRefreshUseCase {
             override suspend fun invoke() {
@@ -36,7 +38,7 @@ class FeedServiceModule {
 
     @Provides
     fun provideAddLikeUseCase(
-        feedRepository: FeedRepository
+        feedRepository: FeedRepository,
     ): AddLikeUseCase {
         return object : AddLikeUseCase {
             override suspend fun invoke(reviewId: Int) {
@@ -47,7 +49,7 @@ class FeedServiceModule {
 
     @Provides
     fun provideDeleteLikeUseCase(
-        feedRepository: FeedRepository
+        feedRepository: FeedRepository,
     ): DeleteLikeUseCase {
         return object : DeleteLikeUseCase {
             override suspend fun invoke(reviewId: Int) {
@@ -58,7 +60,7 @@ class FeedServiceModule {
 
     @Provides
     fun provideAddFavoriteUseCase(
-        feedRepository: FeedRepository
+        feedRepository: FeedRepository,
     ): AddFavoriteUseCase {
         return object : AddFavoriteUseCase {
             override suspend fun invoke(reviewId: Int) {
@@ -69,7 +71,7 @@ class FeedServiceModule {
 
     @Provides
     fun provideDeleteFavoriteUseCase(
-        feedRepository: FeedRepository
+        feedRepository: FeedRepository,
     ): DeleteFavoriteUseCase {
         return object : DeleteFavoriteUseCase {
             override suspend fun invoke(reviewId: Int) {
@@ -80,7 +82,7 @@ class FeedServiceModule {
 
     @Provides
     fun provideGetFeedFlowUseCase(
-        feedRepository: FeedRepository
+        feedRepository: FeedRepository,
     ): GetFeedFlowUseCase {
         return object : GetFeedFlowUseCase {
             override suspend fun invoke(): Flow<List<Feed>> {
@@ -93,14 +95,30 @@ class FeedServiceModule {
 
     @Provides
     fun provideGetMyFeedFlowUseCase(
-        feedRepository: FeedRepository
+        feedRepository: FeedRepository,
     ): GetMyFeedFlowUseCase {
         return object : GetMyFeedFlowUseCase {
-            override fun invoke(reviewId : Int): Flow<List<Feed>> {
+            override fun invoke(reviewId: Int): Flow<List<Feed>> {
                 return feedRepository.getMyFeed(reviewId = reviewId).map {
                     it.map { it.toFeedData() }
                 }
             }
         }
     }
+
+    @Provides
+    fun provideGetFeedByRestaurantIdFlowUseCase(
+        feedRepository: FeedRepository,
+    ): GetFeedByRestaurantIdFlowUseCase {
+        return object : GetFeedByRestaurantIdFlowUseCase {
+            override fun invoke(restaurantId: Int): Flow<List<Feed>> {
+                return feedRepository.getFeedByRestaurantId(restaurantId = restaurantId).map {
+                    Log.d("__FeedServiceModule", "get feed by restaurant id result : ${it}")
+                    it.map { it.toFeedData() }
+                }
+            }
+        }
+    }
+
+
 }
