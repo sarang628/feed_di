@@ -12,7 +12,11 @@ import com.sarang.torang.data.feed.Feed
 fun provideMyFeedScreen(
     reviewId: Int,
     onBack: (() -> Unit)? = null,
-    feed: @Composable ((Feed) -> Unit),
+    feed: @Composable ((
+        feed: Feed,
+        onLike: (Int) -> Unit,
+        onFavorite: (Int) -> Unit,
+    ) -> Unit),
 ): @Composable (onComment: ((Int) -> Unit), onMenu: ((Int) -> Unit), onShare: ((Int) -> Unit)) -> Unit =
     { onComment, onMenu, onShare ->
         val listState = rememberLazyListState()
