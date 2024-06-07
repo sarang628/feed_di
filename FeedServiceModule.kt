@@ -9,6 +9,7 @@ import com.sarang.torang.usecase.DeleteFavoriteUseCase
 import com.sarang.torang.usecase.DeleteLikeUseCase
 import com.sarang.torang.usecase.FeedRefreshUseCase
 import com.sarang.torang.usecase.GetFeedByRestaurantIdFlowUseCase
+import com.sarang.torang.usecase.GetFeedByReviewIdUseCase
 import com.sarang.torang.usecase.GetFeedFlowUseCase
 import com.sarang.torang.usecase.GetMyFeedFlowUseCase
 import dagger.Module
@@ -116,6 +117,17 @@ class FeedServiceModule {
                     Log.d("__FeedServiceModule", "get feed by restaurant id result : ${it}")
                     it.map { it.toFeedData() }
                 }
+            }
+        }
+    }
+
+    @Provides
+    fun provideGetFeedByReviewIdUseCase(
+        feedRepository: FeedRepository,
+    ): GetFeedByReviewIdUseCase {
+        return object : GetFeedByReviewIdUseCase {
+            override suspend fun invoke(reviewId: Int): Feed {
+                return feedRepository.getFeedByReviewId(reviewId = reviewId).toFeedData()
             }
         }
     }
