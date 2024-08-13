@@ -8,6 +8,7 @@ import com.sarang.torang.usecase.AddLikeUseCase
 import com.sarang.torang.usecase.DeleteFavoriteUseCase
 import com.sarang.torang.usecase.DeleteLikeUseCase
 import com.sarang.torang.usecase.FeedRefreshUseCase
+import com.sarang.torang.usecase.FeedWithPageUseCase
 import com.sarang.torang.usecase.GetFeedByRestaurantIdFlowUseCase
 import com.sarang.torang.usecase.GetFeedByReviewIdUseCase
 import com.sarang.torang.usecase.GetFeedFlowUseCase
@@ -33,6 +34,17 @@ class FeedServiceModule {
         return object : FeedRefreshUseCase {
             override suspend fun invoke() {
                 feedRepository.loadFeed()
+            }
+        }
+    }
+
+    @Provides
+    fun provideFeedWithPageUseCase(
+        feedRepository: FeedRepository,
+    ): FeedWithPageUseCase {
+        return object : FeedWithPageUseCase {
+            override suspend fun invoke(page: Int) {
+                feedRepository.loadFeedWithPage(page)
             }
         }
     }
