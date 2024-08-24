@@ -16,7 +16,7 @@ import com.sarang.torang.usecase.GetFeedFlowUseCase
 import com.sarang.torang.usecase.GetMyAllFeedByReviewIdUseCase
 import com.sarang.torang.usecase.GetMyFeedFlowUseCase
 import com.sarang.torang.usecase.GetUserAllFeedByReviewIdUseCase
-import com.sarang.torang.usecase.IsLoginFlowUseCase
+import com.sarang.torang.usecase.IsLoginFlowForFeedUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -173,8 +173,8 @@ class FeedServiceModule {
     @Provides
     fun isLoginFlowUseCase(
         loggedInUserDao: LoggedInUserDao,
-    ): IsLoginFlowUseCase {
-        return object : IsLoginFlowUseCase {
+    ): IsLoginFlowForFeedUseCase {
+        return object : IsLoginFlowForFeedUseCase {
             override val isLogin: Flow<Boolean>
                 get() = loggedInUserDao.getLoggedInUser().map { it != null }
         }
