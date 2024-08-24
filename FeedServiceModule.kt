@@ -1,6 +1,7 @@
 package com.sarang.torang.di.feed_di
 
 import android.util.Log
+import com.sarang.torang.api.ApiFeed
 import com.sarang.torang.data.feed.Feed
 import com.sarang.torang.repository.FeedRepository
 import com.sarang.torang.usecase.AddFavoriteUseCase
@@ -12,7 +13,9 @@ import com.sarang.torang.usecase.FeedWithPageUseCase
 import com.sarang.torang.usecase.GetFeedByRestaurantIdFlowUseCase
 import com.sarang.torang.usecase.GetFeedByReviewIdUseCase
 import com.sarang.torang.usecase.GetFeedFlowUseCase
+import com.sarang.torang.usecase.GetMyAllFeedByReviewIdUseCase
 import com.sarang.torang.usecase.GetMyFeedFlowUseCase
+import com.sarang.torang.usecase.GetUserAllFeedByReviewIdUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -135,11 +138,33 @@ class FeedServiceModule {
 
     @Provides
     fun provideGetFeedByReviewIdUseCase(
-        feedRepository: FeedRepository,
+        feedRepository: FeedRepository
     ): GetFeedByReviewIdUseCase {
         return object : GetFeedByReviewIdUseCase {
             override suspend fun invoke(reviewId: Int): Feed {
                 return feedRepository.getFeedByReviewId(reviewId = reviewId).toFeedData()
+            }
+        }
+    }
+
+    @Provides
+    fun provideGetUserAllFeedByReviewIdUseCase(
+        feedRepository: FeedRepository,
+    ): GetUserAllFeedByReviewIdUseCase {
+        return object : GetUserAllFeedByReviewIdUseCase {
+            override suspend fun invoke(reviewId: Int) {
+                feedRepository.loadUserAllFeedsByReviewId(reviewId)
+            }
+        }
+    }
+
+    @Provides
+    fun provideGetMyAllFeedByReviewIdUseCase(
+        feedRepository: FeedRepository,
+    ): GetMyAllFeedByReviewIdUseCase {
+        return object : GetMyAllFeedByReviewIdUseCase {
+            override suspend fun invoke(reviewId: Int) {
+                feedRepository.loadMyAllFeedsByReviewId(reviewId)
             }
         }
     }
