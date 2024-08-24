@@ -1,7 +1,7 @@
 package com.sarang.torang.di.feed_di
 
 import android.util.Log
-import com.sarang.torang.api.ApiFeed
+import com.sarang.torang.data.dao.LoggedInUserDao
 import com.sarang.torang.data.feed.Feed
 import com.sarang.torang.repository.FeedRepository
 import com.sarang.torang.usecase.AddFavoriteUseCase
@@ -16,6 +16,7 @@ import com.sarang.torang.usecase.GetFeedFlowUseCase
 import com.sarang.torang.usecase.GetMyAllFeedByReviewIdUseCase
 import com.sarang.torang.usecase.GetMyFeedFlowUseCase
 import com.sarang.torang.usecase.GetUserAllFeedByReviewIdUseCase
+import com.sarang.torang.usecase.IsLoginFlowUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -138,7 +139,7 @@ class FeedServiceModule {
 
     @Provides
     fun provideGetFeedByReviewIdUseCase(
-        feedRepository: FeedRepository
+        feedRepository: FeedRepository,
     ): GetFeedByReviewIdUseCase {
         return object : GetFeedByReviewIdUseCase {
             override suspend fun invoke(reviewId: Int): Feed {
@@ -166,6 +167,16 @@ class FeedServiceModule {
             override suspend fun invoke(reviewId: Int) {
                 feedRepository.loadMyAllFeedsByReviewId(reviewId)
             }
+        }
+    }
+
+    @Provides
+    fun isLoginFlowUseCase(
+        loggedInUserDao: LoggedInUserDao,
+    ): IsLoginFlowUseCase {
+        return object : IsLoginFlowUseCase {
+            override val isLogin: Flow<Boolean>
+                get() = loggedInUserDao.getLoggedInUser().map { it != null }
         }
     }
 
