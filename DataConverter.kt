@@ -1,5 +1,7 @@
 package com.sarang.torang.di.feed_di
 
+import android.util.Log
+import com.google.gson.GsonBuilder
 import com.sarang.torang.BuildConfig
 import com.sarang.torang.data.basefeed.Restaurant
 import com.sarang.torang.data.basefeed.Review
@@ -7,7 +9,7 @@ import com.sarang.torang.data.basefeed.User
 import com.sarang.torang.data.entity.ReviewAndImageEntity
 import com.sarang.torang.data.feed.Feed
 
-const val TAG = "_DataConverter"
+private const val TAG = "__DataConverter"
 fun Feed.toReview(): Review {
     return Review(
         reviewId = this.reviewId,
@@ -28,25 +30,31 @@ fun Feed.toReview(): Review {
         isLike = this.isLike,
         isFavorite = this.isFavorite,
         contents = this.contents,
-        createDate =  createDate
+        createDate = createDate
     )
 }
 
 fun ReviewAndImageEntity.toFeedData(): Feed {
-    return Feed(
-        reviewId = this.review.reviewId,
-        userId = this.review.userId,
-        name = this.review.userName,
-        restaurantName = this.review.restaurantName ?: "",
-        rating = this.review.rating,
-        profilePictureUrl = BuildConfig.PROFILE_IMAGE_SERVER_URL + this.review.profilePicUrl,
-        likeAmount = this.review.likeAmount,
-        commentAmount = this.review.commentAmount,
-        isLike = this.like != null,
-        isFavorite = this.favorite != null,
-        contents = this.review.contents,
-        reviewImages = this.images.map { BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl },
-        restaurantId = this.review.restaurantId ?: -1,
-        createDate = this.review.createDate
-    )
+    try {
+        return Feed(
+            reviewId = this.review.reviewId,
+            userId = this.review.userId,
+            name = this.review.userName,
+            restaurantName = this.review.restaurantName ?: "",
+            rating = this.review.rating,
+            profilePictureUrl = BuildConfig.PROFILE_IMAGE_SERVER_URL + this.review.profilePicUrl,
+            likeAmount = this.review.likeAmount,
+            commentAmount = this.review.commentAmount,
+            isLike = this.like != null,
+            isFavorite = this.favorite != null,
+            contents = this.review.contents,
+            reviewImages = this.images.map { BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl },
+            restaurantId = this.review.restaurantId ?: -1,
+            createDate = this.review.createDate
+        )
+    } catch (e: Exception) {
+        Log.e(TAG, e.message.toString())
+        Log.e(TAG, GsonBuilder().setPrettyPrinting().create().toJson(this))
+        throw e
+    }
 }

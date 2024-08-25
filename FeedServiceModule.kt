@@ -31,6 +31,9 @@ import kotlinx.coroutines.flow.map
 @InstallIn(SingletonComponent::class)
 @Module
 class FeedServiceModule {
+
+    private val TAG = "__FeedServiceModule"
+
     @Provides
     fun provideFeedRefreshUseCase(
         feedRepository: FeedRepository,
@@ -130,7 +133,7 @@ class FeedServiceModule {
         return object : GetFeedByRestaurantIdFlowUseCase {
             override fun invoke(restaurantId: Int): Flow<List<Feed>> {
                 return feedRepository.getFeedByRestaurantId(restaurantId = restaurantId).map {
-                    Log.d("__FeedServiceModule", "get feed by restaurant id result : ${it}")
+                    Log.d(TAG, "get feed by restaurant id result : ${it}")
                     it.map { it.toFeedData() }
                 }
             }
