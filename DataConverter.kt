@@ -8,12 +8,13 @@ import com.sarang.torang.data.basefeed.Review
 import com.sarang.torang.data.basefeed.User
 import com.sarang.torang.data.entity.ReviewAndImageEntity
 import com.sarang.torang.data.feed.Feed
+import com.sarang.torang.data.feed.FeedImage
 
 private const val TAG = "__DataConverter"
 fun Feed.toReview(): Review {
     return Review(
         reviewId = this.reviewId,
-        reviewImages = this.reviewImages,
+        reviewImages = this.reviewImages.map { it.url },
         user = User(
             name = this.name,
             profilePictureUrl = this.profilePictureUrl,
@@ -48,7 +49,13 @@ fun ReviewAndImageEntity.toFeedData(): Feed {
             isLike = this.like != null,
             isFavorite = this.favorite != null,
             contents = this.review.contents,
-            reviewImages = this.images.map { BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl },
+            reviewImages = this.images.map {
+                FeedImage(
+                    BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl,
+                    it.width,
+                    it.height
+                )
+            },
             restaurantId = this.review.restaurantId ?: -1,
             createDate = this.review.createDate
         )
