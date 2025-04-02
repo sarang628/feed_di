@@ -17,7 +17,7 @@ fun provideBottonDetectingLazyColumn(): @Composable (
     LazyListState,
     @Composable (() -> Unit)?
 ) -> Unit {
-    return { modifier, count, onBottom, itemCompose, userScrollEnabled, verticalArrangement, listState, contents ->
+    return { modifier, count, onBottom, itemCompose, userScrollEnabled, verticalArrangement, listState, _ ->
         BottomDetectingLazyColumn(
             modifier = modifier,
             items = count,
