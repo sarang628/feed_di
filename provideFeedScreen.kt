@@ -5,7 +5,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.sarang.torang.RootNavController
 import com.sarang.torang.compose.feed.FeedScreenByReviewId
 import com.sarang.torang.di.main_di.provideCommentBottomDialogSheet
-import com.sarang.torang.di.main_di.provideFeed
 import com.sarang.torang.di.main_di.ProvideMainDialog
 import com.sarang.torang.di.video.provideVideoPlayer
 import com.sarang.torang.viewmodels.FeedDialogsViewModel
