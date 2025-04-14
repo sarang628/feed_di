@@ -31,11 +31,7 @@ fun provideFeedScreen(
                 reviewId = reviewId,
                 shimmerBrush = { shimmerBrush(it) },
                 feed = provideFeed(
-                    onComment = {
-                        dialogsViewModel.onComment(it)
-                    },
-                    onMenu = { dialogsViewModel.onMenu(it) },
-                    onShare = { dialogsViewModel.onShare(it) },
+                    dialogsViewModel = dialogsViewModel,
                     navController = rootNavController.navController,
                     rootNavController = rootNavController,
                     videoPlayer = provideVideoPlayer()
