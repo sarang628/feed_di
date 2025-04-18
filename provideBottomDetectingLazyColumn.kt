@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import com.sryang.library.BottomDetectingLazyColumn
 
 
-fun provideBottonDetectingLazyColumn(): @Composable (
+fun provideBottomDetectingLazyColumn(): @Composable (
     Modifier,
     Int,
     () -> Unit,
@@ -25,9 +25,7 @@ fun provideBottonDetectingLazyColumn(): @Composable (
             userScrollEnabled = userScrollEnabled,
             verticalArrangement = verticalArrangement,
             listState = listState,
-            contents = {
-                itemCompose.invoke(it)
-            }
+            contents = { itemCompose.invoke(it) }
         )
     }
 }
