@@ -1,6 +1,7 @@
 package com.sarang.torang.di.feed_di
 
 import android.util.Log
+import androidx.compose.ui.graphics.Path
 import com.sarang.torang.data.dao.LoggedInUserDao
 import com.sarang.torang.data.feed.Feed
 import com.sarang.torang.repository.FeedRepository
@@ -17,6 +18,7 @@ import com.sarang.torang.usecase.GetMyAllFeedByReviewIdUseCase
 import com.sarang.torang.usecase.GetMyFeedFlowUseCase
 import com.sarang.torang.usecase.GetUserAllFeedByReviewIdUseCase
 import com.sarang.torang.usecase.IsLoginFlowForFeedUseCase
+import com.sryang.library.ExpandableText
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -133,7 +135,10 @@ class FeedServiceModule {
         return object : GetFeedByRestaurantIdFlowUseCase {
             override fun invoke(restaurantId: Int): Flow<List<Feed>> {
                 return feedRepository.getFeedByRestaurantId(restaurantId = restaurantId).map {
-                    Log.d(TAG, "get feed by restaurant id result : ${it}")
+                    Log.d(TAG, "get feed by restaurant id: $restaurantId, result : $it")
+                    if (it.isEmpty()) {
+                        throw Exception("해당 식당의 리뷰가 없습니다.")
+                    }
                     it.map { it.toFeedData() }
                 }
             }
