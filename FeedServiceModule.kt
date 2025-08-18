@@ -105,7 +105,7 @@ class FeedServiceModule {
         feedRepository: FeedRepository,
     ): GetFeedFlowUseCase {
         return object : GetFeedFlowUseCase {
-            override suspend fun invoke(): Flow<List<Feed>> {
+            override fun invoke(): Flow<List<Feed>> {
                 return feedRepository.feeds.map {
                     it.map { it.toFeedData() }
                 }
