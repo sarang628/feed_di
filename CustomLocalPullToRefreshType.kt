@@ -4,6 +4,6 @@ import com.sarang.torang.compose.feed.pullToRefreshLayoutType
 import com.sarang.torang.di.pulltorefresh.providePullToRefresh
 import com.sryang.library.pullrefresh.rememberPullToRefreshState
 
-val CustomLocalPullToRefreshType: pullToRefreshLayoutType = { isRefreshing, onRefresh, contents ->
-    providePullToRefresh(rememberPullToRefreshState()).invoke(isRefreshing, onRefresh, contents)
+val CustomLocalPullToRefreshType: pullToRefreshLayoutType = { modifier, isRefreshing, onRefresh, contents ->
+    providePullToRefresh(rememberPullToRefreshState()).invoke(modifier, isRefreshing, onRefresh, contents)
 }
