@@ -134,7 +134,8 @@ class FeedServiceModule {
         feedRepository: FeedRepository,
     ): GetFeedByRestaurantIdFlowUseCase {
         return object : GetFeedByRestaurantIdFlowUseCase {
-            override fun invoke(restaurantId: Int): Flow<List<Feed>> {
+            override fun invoke(restaurantId: Int?): Flow<List<Feed>> {
+                if(restaurantId == null) return MutableStateFlow(listOf())
                 return feedRepository.getFeedByRestaurantId(restaurantId = restaurantId).map {
                     Log.d(TAG, "get feed by restaurant id: $restaurantId, result : $it")
                     if (it.isEmpty()) {
@@ -151,7 +152,8 @@ class FeedServiceModule {
         feedRepository: FeedRepository,
     ): GetFeedByReviewIdUseCase {
         return object : GetFeedByReviewIdUseCase {
-            override suspend fun invoke(reviewId: Int): Feed {
+            override suspend fun invoke(reviewId: Int?): Feed {
+                if(reviewId == null) return Feed.Empty
                 return feedRepository.getFeedByReviewId(reviewId = reviewId).toFeedData()
             }
         }
