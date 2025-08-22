@@ -3,31 +3,22 @@ package com.sarang.torang.di.feed_di
 import android.util.Log
 import com.google.gson.GsonBuilder
 import com.sarang.torang.BuildConfig
-import com.sarang.torang.data.basefeed.Restaurant
-import com.sarang.torang.data.basefeed.Review
-import com.sarang.torang.data.basefeed.User
+import com.sarang.torang.data.basefeed.FeedItemUiState
 import com.sarang.torang.data.entity.ReviewAndImageEntity
 import com.sarang.torang.data.feed.Feed
 import com.sarang.torang.data.feed.FeedImage
 
 private const val TAG = "__DataConverter"
-fun Feed.toReview(): Review {
-    return Review(
-        reviewId = this.reviewId,
+fun Feed.toReview(): FeedItemUiState {
+    return FeedItemUiState(
         reviewImages = this.reviewImages.map { it.url },
-        user = User(
-            name = this.name,
-            profilePictureUrl = this.profilePictureUrl,
-            userId = this.userId
-        ),
-        restaurant = Restaurant(
-            restaurantId = this.restaurantId,
-            restaurantName = this.restaurantName
-        ),
+        userName = this.name,
+        profilePictureUrl = this.profilePictureUrl,
+        restaurantName = this.restaurantName,
         rating = this.rating,
         likeAmount = this.likeAmount,
         commentAmount = this.commentAmount,
-        comments = null,
+        comments = listOf(),
         isLike = this.isLike,
         isFavorite = this.isFavorite,
         contents = this.contents,
