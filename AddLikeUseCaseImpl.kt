@@ -1,5 +1,6 @@
 package com.sarang.torang.di.feed_di
 
+import android.util.Log
 import com.sarang.torang.repository.FeedRepository
 import com.sarang.torang.usecase.AddLikeUseCase
 import dagger.Module
@@ -16,6 +17,7 @@ class AddLikeUseCaseImpl {
     ): AddLikeUseCase {
         return object : AddLikeUseCase {
             override suspend fun invoke(reviewId: Int) {
+                Log.i("__provideAddLikeUseCase", "addLike : reviewId $reviewId")
                 feedRepository.addLike(reviewId)
             }
         }
