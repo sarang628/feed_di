@@ -1,5 +1,6 @@
 package com.sarang.torang.di.feed_di
 
+import android.util.Log
 import com.sarang.torang.repository.FeedRepository
 import com.sarang.torang.usecase.DeleteLikeUseCase
 import dagger.Module
@@ -16,6 +17,7 @@ class DeleteLikeUseCaseImpl {
     ): DeleteLikeUseCase {
         return object : DeleteLikeUseCase {
             override suspend fun invoke(reviewId: Int) {
+                Log.i("__provideDeleteLikeUseCase", "deleteLike : reviewId $reviewId")
                 feedRepository.deleteLike(reviewId)
             }
         }
