@@ -4,7 +4,7 @@ import android.util.Log
 import com.google.gson.GsonBuilder
 import com.sarang.torang.BuildConfig
 import com.sarang.torang.data.basefeed.FeedItemUiState
-import com.sarang.torang.data.entity.ReviewAndImageEntity
+import com.sarang.torang.core.database.model.feed.ReviewAndImageEntity
 import com.sarang.torang.data.feed.Feed
 import com.sarang.torang.data.feed.FeedImage
 

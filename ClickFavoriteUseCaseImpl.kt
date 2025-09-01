@@ -1,6 +1,6 @@
 package com.sarang.torang.di.feed_di
 
-import com.sarang.torang.data.dao.FavoriteDao
+import com.sarang.torang.core.database.dao.FavoriteDao
 import com.sarang.torang.usecase.AddFavoriteUseCase
 import com.sarang.torang.usecase.ClickFavorityUseCase
 import com.sarang.torang.usecase.DeleteFavoriteUseCase

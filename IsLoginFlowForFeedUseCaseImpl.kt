@@ -1,6 +1,6 @@
 package com.sarang.torang.di.feed_di
 
-import com.sarang.torang.data.dao.LoggedInUserDao
+import com.sarang.torang.core.database.dao.LoggedInUserDao
 import com.sarang.torang.usecase.IsLoginFlowForFeedUseCase
 import dagger.Module
 import dagger.Provides

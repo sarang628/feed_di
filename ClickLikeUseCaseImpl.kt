@@ -1,7 +1,7 @@
 package com.sarang.torang.di.feed_di
 
 import android.util.Log
-import com.sarang.torang.data.dao.LikeDao
+import com.sarang.torang.core.database.dao.LikeDao
 import com.sarang.torang.usecase.AddLikeUseCase
 import com.sarang.torang.usecase.ClickLikeUseCase
 import com.sarang.torang.usecase.DeleteLikeUseCase
