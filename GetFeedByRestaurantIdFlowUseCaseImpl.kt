@@ -27,7 +27,7 @@ class GetFeedByRestaurantIdFlowUseCaseImpl {
                 return feedRepository.getFeedByRestaurantId(restaurantId = restaurantId).map {
                     Log.d(tag, "get feed by restaurant id: $restaurantId, result : $it")
                     if (it.isEmpty()) {
-                        throw Exception("해당 식당의 리뷰가 없습니다.")
+                        //throw Exception("해당 식당의 리뷰가 없습니다.") //TODO: 앱 죽음.
                     }
                     it.map { it.toFeedData() }
                 }
