@@ -24,7 +24,7 @@ class GetFeedByRestaurantIdFlowUseCaseImpl {
         return object : GetFeedByRestaurantIdFlowUseCase {
             override fun invoke(restaurantId: Int?): Flow<List<Feed>> {
                 if(restaurantId == null) return MutableStateFlow(listOf())
-                return feedRepository.findByRestaurantId(restaurantId = restaurantId).map {
+                return feedRepository.restaurantFeedsFlow(restaurantId = restaurantId).map {
                     Log.d(tag, "get feed by restaurant id: $restaurantId, result : $it")
                     if (it.isEmpty()) {
                         //throw Exception("해당 식당의 리뷰가 없습니다.") //TODO: 앱 죽음.
