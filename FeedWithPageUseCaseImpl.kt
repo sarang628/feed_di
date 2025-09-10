@@ -16,7 +16,7 @@ class FeedWithPageUseCaseImpl {
     ): FeedWithPageUseCase {
         return object : FeedWithPageUseCase {
             override suspend fun invoke(page: Int) {
-                feedRepository.loadFeedWithPage(page)
+                feedRepository.findByPage(page)
             }
         }
     }

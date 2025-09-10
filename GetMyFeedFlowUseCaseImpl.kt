@@ -23,7 +23,7 @@ class GetMyFeedFlowUseCaseImpl {
             override fun invoke(reviewId: Int?): Flow<List<Feed>> {
                 Log.d("__provideGetMyFeedFlowUseCase", "load feed : ${reviewId}")
                 if(reviewId == null) return MutableStateFlow(listOf())
-                return feedRepository.getMyFeed(reviewId = reviewId).map {
+                return feedRepository.findMyFeedById(reviewId = reviewId).map {
                     it.map { it.toFeedData() }
                 }
             }

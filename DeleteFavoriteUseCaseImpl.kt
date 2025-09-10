@@ -1,6 +1,6 @@
 package com.sarang.torang.di.feed_di
 
-import com.sarang.torang.repository.FeedRepository
+import com.sarang.torang.repository.FavoriteRepository
 import com.sarang.torang.usecase.DeleteFavoriteUseCase
 import dagger.Module
 import dagger.Provides
@@ -12,11 +12,11 @@ import dagger.hilt.components.SingletonComponent
 class DeleteFavoriteUseCaseImpl {
     @Provides
     fun provideDeleteFavoriteUseCase(
-        feedRepository: FeedRepository,
+        favoriteRepository: FavoriteRepository,
     ): DeleteFavoriteUseCase {
         return object : DeleteFavoriteUseCase {
             override suspend fun invoke(reviewId: Int) {
-                feedRepository.deleteFavorite(reviewId)
+                favoriteRepository.deleteFavorite(reviewId)
             }
         }
     }

@@ -18,7 +18,7 @@ class GetFeedByReviewIdUseCaseImpl {
         return object : GetFeedByReviewIdUseCase {
             override suspend fun invoke(reviewId: Int?): Feed {
                 if(reviewId == null) return Feed.Empty
-                return feedRepository.getFeedByReviewId(reviewId = reviewId).toFeedData()
+                return feedRepository.findById(reviewId = reviewId).toFeedData()
             }
         }
     }

@@ -16,7 +16,7 @@ class GetMyAllFeedByReviewIdUseCaseImpl {
     ): GetMyAllFeedByReviewIdUseCase {
         return object : GetMyAllFeedByReviewIdUseCase {
             override suspend fun invoke(reviewId: Int) {
-                feedRepository.loadMyAllFeedsByReviewId(reviewId)
+                feedRepository.findAllUserFeedById(reviewId)
             }
         }
     }
