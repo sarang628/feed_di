@@ -22,7 +22,8 @@ fun Feed.toReview(): FeedItemUiState {
         isLike = this.isLike,
         isFavorite = this.isFavorite,
         contents = this.contents,
-        createDate = createDate
+        createDate = createDate,
+        height = if(this.reviewImages.isEmpty()) 400 else this.reviewImages[0].height,
     )
 }
 

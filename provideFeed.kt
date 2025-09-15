@@ -11,7 +11,6 @@ fun provideFeed(): feedType =
             onLike = { onLike.invoke(feed.reviewId) },
             onFavorite = { onFavorite.invoke(feed.reviewId) },
             isLogin = isLogin,
-            imageHeight = if (imageHeight != 0) imageHeight.dp else 400.dp,
             pageScrollAble = pageScrollAble
         )
     }
