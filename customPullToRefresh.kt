@@ -1,11 +1,9 @@
 package com.sarang.torang.di.feed_di
 
-import android.util.Log
+import androidx.compose.runtime.getValue
 import com.sarang.torang.compose.feed.pullToRefreshLayoutType
 import com.sarang.torang.di.pulltorefresh.providePullToRefresh
 import com.sryang.library.pullrefresh.rememberPullToRefreshState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 
 val customPullToRefresh: pullToRefreshLayoutType = { modifier, pullToRefreshLayoutState, onRefresh, contents ->
     // FeedScreen에 Scaffold가 있어 modifier을 설정하면 위에 공간이 생김.
