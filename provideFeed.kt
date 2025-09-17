@@ -2,16 +2,15 @@ package com.sarang.torang.di.feed_di
 
 import com.sarang.torang.compose.feed.FeedItem
 import com.sarang.torang.compose.feed.FeedItemClickEvents
-import com.sarang.torang.compose.feed.feedType
+import com.sarang.torang.compose.feed.type.feedType
 
-fun provideFeed(): feedType =
-    { feed, onLike, onFavorite, isLogin, onVideoClick, imageHeight, pageScrollAble ->
+fun provideFeed(): feedType = {
         FeedItem(
-            uiState = feed.toReview().copy(isLogin = isLogin),
+            uiState = it.feed.toReview().copy(isLogin = it.isLogin),
             feedItemClickEvents = FeedItemClickEvents(
-                onLike = { onLike.invoke(feed.reviewId) },
-                onFavorite = { onFavorite.invoke(feed.reviewId) },
+                onLike = { it.onLike.invoke(it.feed.reviewId) },
+                onFavorite = { it.onFavorite.invoke(it.feed.reviewId) },
             ),
-            pageScrollAble = pageScrollAble
+            pageScrollAble = it.pageScrollable
         )
     }

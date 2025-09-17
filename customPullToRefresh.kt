@@ -1,7 +1,7 @@
 package com.sarang.torang.di.feed_di
 
 import androidx.compose.runtime.getValue
-import com.sarang.torang.compose.feed.pullToRefreshLayoutType
+import com.sarang.torang.compose.feed.type.pullToRefreshLayoutType
 import com.sarang.torang.di.pulltorefresh.providePullToRefresh
 import com.sryang.library.pullrefresh.rememberPullToRefreshState
 
