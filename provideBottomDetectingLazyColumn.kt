@@ -1,31 +1,23 @@
 package com.sarang.torang.di.feed_di
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import com.sarang.torang.compose.feed.type.BottomDetectingLazyColumnData
 import com.sryang.library.BottomDetectingLazyColumn
 
 
 fun provideBottomDetectingLazyColumn(): @Composable (
-    Modifier,
-    Int,
-    () -> Unit,
-    @Composable (Int) -> Unit,
-    Boolean,
-    Arrangement.Vertical,
-    LazyListState,
+    BottomDetectingLazyColumnData,
     @Composable (() -> Unit)?
 ) -> Unit {
-    return { modifier, count, onBottom, itemCompose, userScrollEnabled, verticalArrangement, listState, _ ->
+    return { data, contents ->
         BottomDetectingLazyColumn(
-            modifier = modifier,
-            items = count,
-            onBottom = { onBottom.invoke() },
-            userScrollEnabled = userScrollEnabled,
-            verticalArrangement = verticalArrangement,
-            listState = listState,
-            contents = { itemCompose.invoke(it) }
+            modifier = data.modifier,
+            items = data.count,
+            onBottom = { data.onBottom.invoke() },
+            userScrollEnabled = data.userScrollEnabled,
+            verticalArrangement = data.arrangement,
+            listState = data.listState,
+            contents = { data.itemCompose.invoke(it) }
         )
     }
 }
