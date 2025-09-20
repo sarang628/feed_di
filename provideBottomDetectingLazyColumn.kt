@@ -6,10 +6,9 @@ import com.sryang.library.BottomDetectingLazyColumn
 
 
 fun provideBottomDetectingLazyColumn(): @Composable (
-    BottomDetectingLazyColumnData,
-    @Composable (() -> Unit)?
+    BottomDetectingLazyColumnData
 ) -> Unit {
-    return { data, contents ->
+    return { data ->
         BottomDetectingLazyColumn(
             modifier = data.modifier,
             items = data.count,
@@ -19,5 +18,6 @@ fun provideBottomDetectingLazyColumn(): @Composable (
             listState = data.listState,
             contents = { data.itemCompose.invoke(it) }
         )
+        data.content.invoke()
     }
 }
