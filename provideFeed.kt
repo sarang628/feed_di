@@ -6,7 +6,7 @@ import com.sarang.torang.compose.feed.type.feedType
 
 fun provideFeed(): feedType = {
         FeedItem(
-            uiState = it.feed.toReview().copy(isLogin = it.isLogin),
+            uiState = it.feed.toReview(),
             feedItemClickEvents = FeedItemClickEvents(
                 onLike = { it.onLike.invoke(it.feed.reviewId) },
                 onFavorite = { it.onFavorite.invoke(it.feed.reviewId) },
