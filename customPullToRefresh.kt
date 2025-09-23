@@ -1,6 +1,7 @@
 package com.sarang.torang.di.feed_di
 
 import androidx.compose.runtime.getValue
+import com.sarang.torang.compose.feed.state.RefreshIndicatorState
 import com.sarang.torang.compose.feed.type.pullToRefreshLayoutType
 import com.sarang.torang.di.pulltorefresh.providePullToRefresh
 import com.sryang.library.pullrefresh.rememberPullToRefreshState
@@ -10,5 +11,5 @@ val customPullToRefresh: pullToRefreshLayoutType = { modifier, pullToRefreshLayo
 
     val indicatorState by pullToRefreshLayoutState.refreshIndicatorState
 
-    providePullToRefresh(rememberPullToRefreshState()).invoke(modifier, indicatorState, onRefresh, contents)
+    providePullToRefresh(rememberPullToRefreshState()).invoke(modifier, indicatorState != RefreshIndicatorState.Default, onRefresh, contents)
 }
