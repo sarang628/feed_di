@@ -1,5 +1,6 @@
 package com.sarang.torang.di.feed_di
 
+import android.util.Log
 import com.sarang.torang.repository.FeedRepository
 import com.sarang.torang.uistate.FeedLoadingUiState
 import com.sarang.torang.uistate.FeedUiState
@@ -28,6 +29,7 @@ class GetFeedFlowUseCaseImpl {
         return object : GetFeedFlowUseCase {
             override fun invoke(coroutineScope: CoroutineScope): StateFlow<FeedUiState> {
                 return combine(feedRepository.feeds, loginFlowForFeedUseCase.isLogin){ feeds , isLogin ->
+                    Log.d("__GetFeedFlowUseCaseImpl", "isLogin : $isLogin")
                     FeedUiState(feeds?.map { it.toFeedData() } ?: listOf(), isLogin)
                 }.stateIn(
                     scope = coroutineScope,

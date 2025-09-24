@@ -9,7 +9,7 @@ import com.sarang.torang.data.feed.Feed
 import com.sarang.torang.data.feed.FeedImage
 
 private const val TAG = "__DataConverter"
-fun Feed.toReview(): FeedItemUiState {
+fun Feed.toReview(isLogin : Boolean = false): FeedItemUiState {
     return FeedItemUiState(
         reviewImages = this.reviewImages.map { it.url },
         userName = this.name,
@@ -24,6 +24,7 @@ fun Feed.toReview(): FeedItemUiState {
         contents = this.contents,
         createDate = createDate,
         height = if(this.reviewImages.isEmpty()) 500 else this.reviewImages[0].height,
+        isLogin = isLogin
     )
 }
 
