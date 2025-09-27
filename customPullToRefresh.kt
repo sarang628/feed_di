@@ -12,6 +12,9 @@ val customPullToRefresh: pullToRefreshLayoutType = { modifier, pullToRefreshLayo
     val indicatorState by pullToRefreshLayoutState.refreshIndicatorState
 
     providePullToRefresh(rememberPullToRefreshState()).invoke(
-        PullToRefreshData(modifier, indicatorState , onRefresh, contents)
+        PullToRefreshData(
+
+            modifier, indicatorState , onRefresh, contents
+        )
     )
 }
