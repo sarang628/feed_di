@@ -12,7 +12,6 @@ fun provideBottomDetectingLazyColumn(): @Composable (
     return { data ->
         Box(modifier = data.modifier){
             BottomDetectingLazyColumn(
-                modifier = data.modifier,
                 items = data.count,
                 onBottom = { data.onBottom.invoke() },
                 userScrollEnabled = data.userScrollEnabled,
