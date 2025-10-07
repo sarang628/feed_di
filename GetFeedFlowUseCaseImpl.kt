@@ -29,7 +29,6 @@ class GetFeedFlowUseCaseImpl {
         return object : GetFeedFlowUseCase {
             override fun invoke(coroutineScope: CoroutineScope): StateFlow<FeedUiState> {
                 return combine(feedRepository.feeds, loginFlowForFeedUseCase.isLogin){ feeds , isLogin ->
-                    Log.d("__GetFeedFlowUseCaseImpl", "isLogin : $isLogin")
                     FeedUiState(feeds?.map { it.toFeedData() } ?: listOf(), isLogin)
                 }.stateIn(
                     scope = coroutineScope,
