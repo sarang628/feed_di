@@ -24,14 +24,15 @@ class GetFeedByRestaurantIdFlowUseCaseImpl {
     ): GetFeedByRestaurantIdFlowUseCase {
         return object : GetFeedByRestaurantIdFlowUseCase {
             override fun invoke(restaurantId: Int?): Flow<FeedUiState> {
-                if(restaurantId == null) return MutableStateFlow(FeedUiState())
+                return MutableStateFlow(FeedUiState())
+                /*if(restaurantId == null) return MutableStateFlow(FeedUiState())
                 return combine(feedRepository.restaurantFeedsFlow(restaurantId = restaurantId), loginFlowForFeedUseCase.isLogin)
                 { feed, isLogin ->
                     FeedUiState(
                         list = feed.map { it.toFeedData() },
                         isLogin = isLogin
                     )
-                }
+                }*/
             }
         }
     }
