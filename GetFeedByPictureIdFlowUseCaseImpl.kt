@@ -23,12 +23,13 @@ class GetFeedByPictureIdFlowUseCaseImpl {
         loginFlowForFeedUseCase: IsLoginFlowForFeedUseCase
     ): GetFeedByPictureIdFlowUseCase {
         return object : GetFeedByPictureIdFlowUseCase {
-            override fun invoke(restaurantId: Int?): Flow<FeedUiState> {
-                if(restaurantId == null) return MutableStateFlow(FeedUiState())
-                return combine(feedRepository.restaurantFeedsFlow(restaurantId = restaurantId), loginFlowForFeedUseCase.isLogin)
+            override fun invoke(pictureId: Int?): Flow<FeedUiState> {
+                if(pictureId == null) return MutableStateFlow(FeedUiState())
+                //TODO:: 사진 아이디로 리뷰 가져오기 (repository 개발 완료 최신버전 적용하기)
+                return combine(feedRepository.findByPictureIdFlow(pictureId = pictureId), loginFlowForFeedUseCase.isLogin)
                 { feed, isLogin ->
                     FeedUiState(
-                        list = feed.map { it.toFeedData() },
+                        list = feed?.let { listOf(it.toFeedData()) } ?: run{ emptyList() },
                         isLogin = isLogin
                     )
                 }
