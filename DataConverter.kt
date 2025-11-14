@@ -24,6 +24,7 @@ fun Feed.toReview(isLogin : Boolean = false): FeedItemUiState {
         contents = this.contents,
         createDate = createDate,
         height = if(this.reviewImages.isEmpty()) 500 else this.reviewImages[0].height,
+        width = if(this.reviewImages.isEmpty()) 500 else this.reviewImages[0].width,
         isLogin = isLogin
     )
 }
