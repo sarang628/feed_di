@@ -11,6 +11,7 @@ fun provideFeed(): feedType = {
                 onLike = { it.onLike.invoke(it.feed.reviewId) },
                 onFavorite = { it.onFavorite.invoke(it.feed.reviewId) },
             ),
-            pageScrollAble = it.pageScrollable
+            pageScrollAble = it.pageScrollable,
+            onPage = {}
         )
     }
