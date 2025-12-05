@@ -16,7 +16,7 @@ class FindFeedByRestaurantIdFlowUseCaseImpl {
     ): FindFeedByRestaurantIdFlowUseCase {
         return object : FindFeedByRestaurantIdFlowUseCase {
             override suspend fun invoke(restaurantId: Int) {
-                feedRepository.findByRestaurantId(restaurantId)
+                feedRepository.loadByRestaurantId(restaurantId)
             }
         }
     }

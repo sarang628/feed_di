@@ -17,7 +17,7 @@ class FindFeedByPictureIdFlowUseCaseImpl {
     ): FindFeedByPictureIdFlowUseCase {
         return object : FindFeedByPictureIdFlowUseCase {
             override suspend fun invoke(restaurantId: Int) {
-                feedRepository.findByRestaurantId(restaurantId)
+                feedRepository.loadByRestaurantId(restaurantId)
             }
         }
     }
