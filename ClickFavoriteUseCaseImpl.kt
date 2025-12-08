@@ -22,7 +22,7 @@ class ClickFavoriteUseCaseImpl {
         return object : ClickFavorityUseCase {
             override suspend fun invoke(reviewId: Int) {
                 try {
-                    favoriteDao.getFavorite1(reviewId)
+                    favoriteDao.findByReviewId(reviewId)
                     deleteFavoriteUseCase.invoke(reviewId)
                 } catch (e: Exception) {
                     addFavoriteUseCase.invoke(reviewId)

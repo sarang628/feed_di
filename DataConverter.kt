@@ -33,25 +33,25 @@ fun ReviewAndImageEntity.toFeedData(): Feed {
     try {
         return Feed(
             reviewId = this.review.reviewId,
-            userId = this.review.userId,
-            name = this.review.userName,
+            userId = this.review.userId ?: 0,
+            name = this.review.userName ?: "",
             restaurantName = this.review.restaurantName ?: "",
-            rating = this.review.rating,
+            rating = this.review.rating ?: 0f,
             profilePictureUrl = BuildConfig.PROFILE_IMAGE_SERVER_URL + this.review.profilePicUrl,
-            likeAmount = this.review.likeAmount,
-            commentAmount = this.review.commentAmount,
+            likeAmount = this.review.likeAmount ?: 0,
+            commentAmount = this.review.commentAmount ?: 0,
             isLike = this.like != null,
             isFavorite = this.favorite != null,
-            contents = this.review.contents,
+            contents = this.review.contents ?: "",
             reviewImages = this.images.map {
                 FeedImage(
                     BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl,
-                    it.width,
-                    it.height
+                    it.width ?: 0,
+                    it.height ?: 0
                 )
             },
             restaurantId = this.review.restaurantId ?: -1,
-            createDate = this.review.createDate
+            createDate = this.review.createDate ?: ""
         )
     } catch (e: Exception) {
         Log.e(TAG, e.message.toString())

@@ -16,7 +16,7 @@ class FeedRefreshUseCaseImpl {
     ): FeedRefreshUseCase {
         return object : FeedRefreshUseCase {
             override suspend fun invoke() {
-                feedRepository.loadAll()
+                feedRepository.loadByPage(0)
             }
         }
     }
