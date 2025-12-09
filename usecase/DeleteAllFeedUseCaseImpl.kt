@@ -1,4 +1,4 @@
-package com.sarang.torang.di.feed_di
+package com.sarang.torang.di.feed_di.usecase
 
 import com.sarang.torang.di.repository.FeedRepositoryImpl
 import com.sarang.torang.usecase.DeleteAllFeedUseCase

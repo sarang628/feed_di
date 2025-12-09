@@ -1,7 +1,7 @@
-package com.sarang.torang.di.feed_di
+package com.sarang.torang.di.feed_di.usecase
 
 import com.sarang.torang.repository.FeedRepository
-import com.sarang.torang.usecase.GetMyAllFeedByReviewIdUseCase
+import com.sarang.torang.usecase.GetUserAllFeedByReviewIdUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,15 +9,16 @@ import dagger.hilt.components.SingletonComponent
 
 @InstallIn(SingletonComponent::class)
 @Module
-class GetMyAllFeedByReviewIdUseCaseImpl {
+class GetUserAllFeedByReviewIdUseCase {
     @Provides
-    fun provideGetMyAllFeedByReviewIdUseCase(
+    fun provideGetUserAllFeedByReviewIdUseCase(
         feedRepository: FeedRepository,
-    ): GetMyAllFeedByReviewIdUseCase {
-        return object : GetMyAllFeedByReviewIdUseCase {
+    ): GetUserAllFeedByReviewIdUseCase {
+        return object : GetUserAllFeedByReviewIdUseCase {
             override suspend fun invoke(reviewId: Int) {
                 feedRepository.findAllUserFeedById(reviewId)
             }
         }
     }
+
 }

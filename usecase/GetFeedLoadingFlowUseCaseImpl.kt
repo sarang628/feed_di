@@ -1,9 +1,8 @@
-package com.sarang.torang.di.feed_di
+package com.sarang.torang.di.feed_di.usecase
 
 import com.sarang.torang.repository.FeedRepository
 import com.sarang.torang.uistate.FeedLoadingUiState
 import com.sarang.torang.usecase.GetFeedLodingFlowUseCase
-import com.sarang.torang.usecase.IsLoginFlowForFeedUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,7 +28,7 @@ class GetFeedLoadingFlowUseCaseImpl {
                     else FeedLoadingUiState.Success
                 }.stateIn(
                     scope = coroutineScope,
-                    started = SharingStarted.WhileSubscribed(5_000),
+                    started = SharingStarted.Companion.WhileSubscribed(5_000),
                     initialValue = FeedLoadingUiState.Loading
                 )
             }

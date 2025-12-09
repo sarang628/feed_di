@@ -1,5 +1,6 @@
-package com.sarang.torang.di.feed_di
+package com.sarang.torang.di.feed_di.usecase
 
+import com.sarang.torang.di.feed_di.toFeedData
 import com.sarang.torang.repository.FeedRepository
 import com.sarang.torang.uistate.FeedUiState
 import com.sarang.torang.usecase.GetFeedByRestaurantIdFlowUseCase
@@ -25,7 +26,10 @@ class GetFeedByRestaurantIdFlowUseCaseImpl {
         return object : GetFeedByRestaurantIdFlowUseCase {
             override fun invoke(restaurantId: Int?): Flow<FeedUiState> {
                 if(restaurantId == null) return MutableStateFlow(FeedUiState())
-                return combine(feedRepository.restaurantFeedsFlow(restaurantId = restaurantId), loginFlowForFeedUseCase.isLogin)
+                return combine(
+                    feedRepository.restaurantFeedsFlow(restaurantId = restaurantId),
+                    loginFlowForFeedUseCase.isLogin
+                )
                 { feed, isLogin ->
                     FeedUiState(
                         list = feed.map { it.toFeedData() },

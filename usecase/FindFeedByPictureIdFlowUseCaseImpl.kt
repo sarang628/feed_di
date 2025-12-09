@@ -1,7 +1,7 @@
-package com.sarang.torang.di.feed_di
+package com.sarang.torang.di.feed_di.usecase
 
 import com.sarang.torang.repository.FeedRepository
-import com.sarang.torang.usecase.FindFeedByRestaurantIdFlowUseCase
+import com.sarang.torang.usecase.FindFeedByPictureIdFlowUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,12 +9,12 @@ import dagger.hilt.components.SingletonComponent
 
 @InstallIn(SingletonComponent::class)
 @Module
-class FindFeedByRestaurantIdFlowUseCaseImpl {
+class FindFeedByPictureIdFlowUseCaseImpl {
     @Provides
-    fun provideFindFeedByRestaurantIdFlowUseCase(
+    fun provideFindFeedByPictureIdFlowUseCase(
         feedRepository: FeedRepository
-    ): FindFeedByRestaurantIdFlowUseCase {
-        return object : FindFeedByRestaurantIdFlowUseCase {
+    ): FindFeedByPictureIdFlowUseCase {
+        return object : FindFeedByPictureIdFlowUseCase {
             override suspend fun invoke(restaurantId: Int) {
                 feedRepository.loadByRestaurantId(restaurantId)
             }

@@ -1,7 +1,6 @@
-package com.sarang.torang.di.feed_di
+package com.sarang.torang.di.feed_di.usecase
 
 import com.sarang.torang.repository.FeedRepository
-import com.sarang.torang.usecase.FindFeedByPictureIdFlowUseCase
 import com.sarang.torang.usecase.FindFeedByRestaurantIdFlowUseCase
 import dagger.Module
 import dagger.Provides
@@ -10,12 +9,12 @@ import dagger.hilt.components.SingletonComponent
 
 @InstallIn(SingletonComponent::class)
 @Module
-class FindFeedByPictureIdFlowUseCaseImpl {
+class FindFeedByRestaurantIdFlowUseCaseImpl {
     @Provides
-    fun provideFindFeedByPictureIdFlowUseCase(
+    fun provideFindFeedByRestaurantIdFlowUseCase(
         feedRepository: FeedRepository
-    ): FindFeedByPictureIdFlowUseCase {
-        return object : FindFeedByPictureIdFlowUseCase {
+    ): FindFeedByRestaurantIdFlowUseCase {
+        return object : FindFeedByRestaurantIdFlowUseCase {
             override suspend fun invoke(restaurantId: Int) {
                 feedRepository.loadByRestaurantId(restaurantId)
             }

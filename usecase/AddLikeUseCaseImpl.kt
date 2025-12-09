@@ -1,4 +1,4 @@
-package com.sarang.torang.di.feed_di
+package com.sarang.torang.di.feed_di.usecase
 
 import android.util.Log
 import com.sarang.torang.repository.LikeRepository

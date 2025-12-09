@@ -1,7 +1,8 @@
-package com.sarang.torang.di.feed_di
+package com.sarang.torang.di.feed_di.usecase
 
 import android.util.Log
 import com.sarang.torang.data.feed.Feed
+import com.sarang.torang.di.feed_di.toFeedData
 import com.sarang.torang.repository.FeedRepository
 import com.sarang.torang.usecase.GetMyFeedFlowUseCase
 import dagger.Module
