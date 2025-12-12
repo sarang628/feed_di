@@ -13,11 +13,10 @@ val customPullToRefresh: pullToRefreshLayoutType = { modifier, pullToRefreshLayo
     val indicatorState by pullToRefreshLayoutState.refreshIndicatorState
 
     providePullToRefresh(rememberPullToRefreshState()).invoke(
-        PullToRefreshData(
-
-            modifier, indicatorState , onRefresh, contents
-        )
-    )
+        PullToRefreshData(modifier   = modifier,
+                               state      = indicatorState ,
+                               onRefresh  = onRefresh,
+                               contents   = contents))
 }
 
 val customPullToRefreshforRestaurantReview: pullToRefreshLayoutType = { modifier, pullToRefreshLayoutState, onRefresh, contents ->
