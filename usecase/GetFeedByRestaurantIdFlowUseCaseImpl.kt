@@ -27,7 +27,7 @@ class GetFeedByRestaurantIdFlowUseCaseImpl {
             override fun invoke(restaurantId: Int?): Flow<FeedUiState> {
                 if(restaurantId == null) return MutableStateFlow(FeedUiState())
                 return combine(
-                    feedRepository.restaurantFeedsFlow(restaurantId = restaurantId),
+                    feedRepository.findRestaurantFeedsFlow(restaurantId = restaurantId),
                     loginFlowForFeedUseCase.isLogin
                 )
                 { feed, isLogin ->
