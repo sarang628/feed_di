@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder
 import com.sarang.torang.BuildConfig
 import com.sarang.torang.data.basefeed.FeedItemUiState
 import com.sarang.torang.core.database.model.feed.ReviewAndImageEntity
+import com.sarang.torang.data.ReviewAndImage
 import com.sarang.torang.data.feed.Feed
 import com.sarang.torang.data.feed.FeedImage
 
@@ -29,7 +30,7 @@ fun Feed.toReview(isLogin : Boolean = false): FeedItemUiState {
     )
 }
 
-fun ReviewAndImageEntity.toFeedData(): Feed {
+fun ReviewAndImage.toFeedData(): Feed {
     try {
         return Feed(
             reviewId = this.review.reviewId,
