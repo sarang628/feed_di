@@ -21,7 +21,6 @@ val customPullToRefresh: pullToRefreshLayoutType = { modifier, pullToRefreshLayo
         snapshotFlow {
             state.refreshIndicatorState.value
         }.collect {
-            Log.d("__customPullToRefresh", "${it}")
             when(it){
                 com.sryang.library.pullrefresh.RefreshIndicatorState.Default->{
                     pullToRefreshLayoutState.updateState(RefreshIndicatorState.Default)
