@@ -2,6 +2,7 @@ package com.sarang.torang.di.feed_di.usecase
 
 import android.util.Log
 import com.sarang.torang.core.database.dao.LikeDao
+import com.sarang.torang.repository.LikeRepository
 import com.sarang.torang.usecase.AddLikeUseCase
 import com.sarang.torang.usecase.ClickLikeUseCase
 import com.sarang.torang.usecase.DeleteLikeUseCase
@@ -22,14 +23,10 @@ class ClickLikeUseCaseImpl {
     ): ClickLikeUseCase {
         return object : ClickLikeUseCase {
             override suspend fun invoke(reviewId: Int) {
-                try {
-                    if (likeDao.has(reviewId)) {
-                        addLikeUseCase.invoke(reviewId)
-                    } else {
-                        deleteLikeUseCase.invoke(reviewId)
-                    }
-                } catch (e: Exception) {
-                    Log.i("__provideClickLikeUseCase", "click like failed reviewId : ${reviewId}. cause: ${e.toString()}")
+                if (!likeDao.has(reviewId)) {
+                    addLikeUseCase.invoke(reviewId)
+                } else {
+                    deleteLikeUseCase.invoke(reviewId)
                 }
             }
         }
