@@ -3,7 +3,7 @@ package com.sarang.torang.di.feed_di.usecase
 import com.sarang.torang.data.feed.Feed
 import com.sarang.torang.di.feed_di.toFeedData
 import com.sarang.torang.repository.FeedRepository
-import com.sarang.torang.usecase.GetFeedByReviewIdUseCase
+import com.sarang.torang.usecase.LoadFeedByReviewIdUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,15 +14,14 @@ import kotlinx.coroutines.flow.map
 
 @InstallIn(SingletonComponent::class)
 @Module
-class GetFeedByReviewIdUseCaseImpl {
+class LoadFeedByReviewIdUseCaseImpl {
     @Provides
-    fun provideGetFeedByReviewIdUseCase(
+    fun provideLoadFeedByReviewIdUseCase(
         feedRepository: FeedRepository,
-    ): GetFeedByReviewIdUseCase {
-        return object : GetFeedByReviewIdUseCase {
-            override fun invoke(reviewId: Int?): Flow<Feed?> {
-                if(reviewId == null) return MutableStateFlow(null)
-                return feedRepository.findByIdFlow(reviewId = reviewId).map { if(it == null) null else it.toFeedData() }
+    ): LoadFeedByReviewIdUseCase {
+        return object : LoadFeedByReviewIdUseCase {
+            override suspend fun invoke(reviewId: Int) {
+                return feedRepository.loadById(reviewId = reviewId)
             }
         }
     }
