@@ -3,7 +3,7 @@ package com.sarang.torang.di.feed_di.usecase
 import android.util.Log
 import com.sarang.torang.data.feed.Feed
 import com.sarang.torang.di.feed_di.toFeedData
-import com.sarang.torang.repository.FeedRepository
+import com.sarang.torang.repository.feed.FeedFlowRepository
 import com.sarang.torang.usecase.GetMyFeedFlowUseCase
 import dagger.Module
 import dagger.Provides
@@ -18,13 +18,13 @@ import kotlinx.coroutines.flow.map
 class GetMyFeedFlowUseCaseImpl {
     @Provides
     fun provideGetMyFeedFlowUseCase(
-        feedRepository: FeedRepository,
+        feedFlowRepository: FeedFlowRepository,
     ): GetMyFeedFlowUseCase {
         return object : GetMyFeedFlowUseCase {
             override fun invoke(reviewId: Int?): Flow<List<Feed>> {
                 Log.d("__provideGetMyFeedFlowUseCase", "load feed : ${reviewId}")
                 if(reviewId == null) return MutableStateFlow(listOf())
-                return feedRepository.findMyFeedById(reviewId = reviewId).map {
+                return feedFlowRepository.findMyFeedById(reviewId = reviewId).map {
                     it.map { it.toFeedData() }
                 }
             }

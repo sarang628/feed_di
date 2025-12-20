@@ -1,6 +1,6 @@
 package com.sarang.torang.di.feed_di.usecase
 
-import com.sarang.torang.repository.FeedRepository
+import com.sarang.torang.repository.feed.FeedRepository
 import com.sarang.torang.usecase.GetUserAllFeedByReviewIdUseCase
 import dagger.Module
 import dagger.Provides

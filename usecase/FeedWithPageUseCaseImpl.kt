@@ -1,6 +1,6 @@
 package com.sarang.torang.di.feed_di.usecase
 
-import com.sarang.torang.repository.FeedRepository
+import com.sarang.torang.repository.feed.FeedLoadRepository
 import com.sarang.torang.usecase.FeedWithPageUseCase
 import dagger.Module
 import dagger.Provides
@@ -12,11 +12,11 @@ import dagger.hilt.components.SingletonComponent
 class FeedWithPageUseCaseImpl {
     @Provides
     fun provideFeedWithPageUseCase(
-        feedRepository: FeedRepository,
+        feedLoadRepository: FeedLoadRepository,
     ): FeedWithPageUseCase {
         return object : FeedWithPageUseCase {
             override suspend fun invoke(page: Int) {
-                feedRepository.loadByPage(page)
+                feedLoadRepository.loadByPage(page)
             }
         }
     }

@@ -1,7 +1,7 @@
 package com.sarang.torang.di.feed_di.usecase
 
 import com.sarang.torang.di.feed_di.toFeedData
-import com.sarang.torang.repository.FeedRepository
+import com.sarang.torang.repository.feed.FeedFlowRepository
 import com.sarang.torang.uistate.FeedUiState
 import com.sarang.torang.usecase.GetFeedByPictureIdFlowUseCase
 import com.sarang.torang.usecase.IsLoginFlowForFeedUseCase
@@ -20,7 +20,7 @@ class GetFeedByPictureIdFlowUseCaseImpl {
 
     @Provides
     fun provideGetFeedByPictureIdFlowUseCase(
-        feedRepository: FeedRepository,
+        feedFlowRepository: FeedFlowRepository,
         loginFlowForFeedUseCase: IsLoginFlowForFeedUseCase
     ): GetFeedByPictureIdFlowUseCase {
         return object : GetFeedByPictureIdFlowUseCase {
@@ -28,7 +28,7 @@ class GetFeedByPictureIdFlowUseCaseImpl {
                 if(pictureId == null) return MutableStateFlow(FeedUiState())
                 //TODO:: 사진 아이디로 리뷰 가져오기 (repository 개발 완료 최신버전 적용하기)
                 return combine(
-                    feedRepository.findByPictureIdFlow(pictureId = pictureId),
+                    feedFlowRepository.findByPictureIdFlow(pictureId = pictureId),
                     loginFlowForFeedUseCase.isLogin
                 )
                 { feed, isLogin ->
