@@ -1,7 +1,7 @@
 package com.sarang.torang.di.feed_di.usecase
 
 import com.sarang.torang.di.feed_di.toFeedData
-import com.sarang.torang.repository.FeedRepository
+import com.sarang.torang.repository.feed.FeedLoadRepository
 import com.sarang.torang.uistate.FeedUiState
 import com.sarang.torang.usecase.GetFeedFlowUseCase
 import com.sarang.torang.usecase.IsLoginFlowForFeedUseCase
@@ -20,13 +20,13 @@ import kotlinx.coroutines.flow.stateIn
 class GetFeedFlowUseCaseImpl {
     @Provides
     fun provideGetFeedFlowUseCase(
-        feedRepository: FeedRepository,
+        feedLoadRepository: FeedLoadRepository,
         loginFlowForFeedUseCase: IsLoginFlowForFeedUseCase
     ): GetFeedFlowUseCase {
         return object : GetFeedFlowUseCase {
             override fun invoke(coroutineScope: CoroutineScope): StateFlow<FeedUiState> {
                 return combine(
-                    feedRepository.feeds,
+                    feedLoadRepository.feeds,
                     loginFlowForFeedUseCase.isLogin
                 ) { feeds, isLogin ->
                     FeedUiState(feeds?.map { it.toFeedData() } ?: listOf(), isLogin)

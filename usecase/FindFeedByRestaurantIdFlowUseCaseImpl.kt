@@ -1,6 +1,6 @@
 package com.sarang.torang.di.feed_di.usecase
 
-import com.sarang.torang.repository.FeedRepository
+import com.sarang.torang.repository.feed.FeedLoadRepository
 import com.sarang.torang.usecase.FindFeedByRestaurantIdFlowUseCase
 import dagger.Module
 import dagger.Provides
@@ -12,11 +12,11 @@ import dagger.hilt.components.SingletonComponent
 class FindFeedByRestaurantIdFlowUseCaseImpl {
     @Provides
     fun provideFindFeedByRestaurantIdFlowUseCase(
-        feedRepository: FeedRepository
+        feedLoadRepository: FeedLoadRepository
     ): FindFeedByRestaurantIdFlowUseCase {
         return object : FindFeedByRestaurantIdFlowUseCase {
             override suspend fun invoke(restaurantId: Int) {
-                feedRepository.loadByRestaurantId(restaurantId)
+                feedLoadRepository.loadByRestaurantId(restaurantId)
             }
         }
     }

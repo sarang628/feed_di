@@ -1,6 +1,6 @@
 package com.sarang.torang.di.feed_di.usecase
 
-import com.sarang.torang.repository.FeedRepository
+import com.sarang.torang.repository.feed.FeedLoadRepository
 import com.sarang.torang.uistate.FeedLoadingUiState
 import com.sarang.torang.usecase.GetFeedLodingFlowUseCase
 import dagger.Module
@@ -18,11 +18,11 @@ import kotlinx.coroutines.flow.stateIn
 class GetFeedLoadingFlowUseCaseImpl {
     @Provides
     fun provideGetFeedFlowUseCase(
-        feedRepository: FeedRepository,
+        feedLoadRepository: FeedLoadRepository,
     ): GetFeedLodingFlowUseCase {
         return object : GetFeedLodingFlowUseCase {
             override fun invoke(coroutineScope: CoroutineScope): StateFlow<FeedLoadingUiState> {
-                return feedRepository.feeds.map {
+                return feedLoadRepository.feeds.map {
                     feeds ->
                     if (feeds == null) FeedLoadingUiState.Loading
                     else FeedLoadingUiState.Success
