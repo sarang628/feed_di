@@ -1,8 +1,8 @@
 package com.sarang.torang.di.feed_di
 
 import com.sarang.torang.compose.feed.FeedItem
-import com.sarang.torang.compose.feed.FeedItemClickEvents
 import com.sarang.torang.compose.feed.type.feedType
+import com.sarang.torang.data.basefeed.FeedItemClickEvents
 
 fun provideFeed(): feedType = {
         FeedItem(
@@ -11,7 +11,7 @@ fun provideFeed(): feedType = {
                 onLike = { it.onLike.invoke(it.feed.reviewId) },
                 onFavorite = { it.onFavorite.invoke(it.feed.reviewId) },
             ),
-            pageScrollAble = it.pageScrollable,
+            pageScroll = it.pageScrollable,
             onPage = {}
         )
     }
