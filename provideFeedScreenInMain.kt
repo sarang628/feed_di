@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sarang.torang.compose.feed.FeedScreenInMain
-import com.sarang.torang.compose.feed.internal.components.LocalExpandableTextType
-import com.sarang.torang.compose.feed.internal.components.LocalFeedImageLoader
+import com.sarang.torang.compose.feed.internal.components.type.LocalExpandableTextType
+import com.sarang.torang.compose.feed.internal.components.type.LocalFeedImageLoader
 import com.sarang.torang.compose.feed.type.LocalBottomDetectingLazyColumnType
 import com.sarang.torang.compose.feed.type.LocalFeedCompose
 import com.sarang.torang.compose.feed.type.LocalPullToRefreshLayoutType
