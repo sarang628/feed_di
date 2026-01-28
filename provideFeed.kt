@@ -8,7 +8,7 @@ import com.sarang.torang.data.basefeed.FeedItemClickEvents
 import com.sarang.torang.di.basefeed_di.CustomVideoPlayerType
 
 fun provideFeed(): feedType = {
-    CompositionLocalProvider(LocalVideoPlayerType provides CustomVideoPlayerType) {
+    CompositionLocalProvider(LocalVideoPlayerType provides CustomVideoPlayerType()) {
         FeedItem(
             uiState = it.feed.toReview(it.isLogin),
             feedItemClickEvents = FeedItemClickEvents(
