@@ -6,14 +6,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.sarang.torang.compose.feed.FeedItem
+import com.sarang.torang.compose.feed.internal.components.type.LocalExpandableTextType
+import com.sarang.torang.compose.feed.internal.components.type.LocalFeedImageLoader
 import com.sarang.torang.compose.feed.internal.components.type.LocalVideoPlayerType
 import com.sarang.torang.compose.feed.type.feedType
 import com.sarang.torang.data.basefeed.FeedItemClickEvents
+import com.sarang.torang.di.basefeed_di.CustomExpandableTextType
+import com.sarang.torang.di.basefeed_di.CustomFeedImageLoader
 import com.sarang.torang.di.basefeed_di.CustomVideoPlayerType
 
 fun provideFeed(): feedType = {
     var isPlayed by remember { mutableStateOf(false) }
-    CompositionLocalProvider(LocalVideoPlayerType provides CustomVideoPlayerType(onPlayed = { isPlayed = true })) {
+    CompositionLocalProvider(
+        LocalVideoPlayerType provides CustomVideoPlayerType(onPlayed = { isPlayed = true }),
+        LocalExpandableTextType provides CustomExpandableTextType,
+        LocalFeedImageLoader provides {CustomFeedImageLoader().invoke(it)},
+    ) {
         FeedItem(
             uiState             = it.feed.toReview(it.isLogin),
             pageScroll          = it.pageScrollable,
