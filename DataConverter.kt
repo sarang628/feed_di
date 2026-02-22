@@ -3,9 +3,10 @@ package com.sarang.torang.di.feed_di
 import android.util.Log
 import com.google.gson.GsonBuilder
 import com.sarang.torang.BuildConfig
-import com.sarang.torang.data.basefeed.FeedItemUiState
-import com.sarang.torang.core.database.model.feed.ReviewAndImageEntity
+import com.sarang.torang.compose.feed.internal.components.FeedBottomUiState
+import com.sarang.torang.compose.feed.internal.components.FeedTopUiState
 import com.sarang.torang.data.ReviewAndImage
+import com.sarang.torang.data.basefeed.FeedItemUiState
 import com.sarang.torang.data.feed.Feed
 import com.sarang.torang.data.feed.FeedImage
 
@@ -13,20 +14,24 @@ private const val TAG = "__DataConverter"
 fun Feed.toReview(isLogin : Boolean = false): FeedItemUiState {
     return FeedItemUiState(
         reviewImages = this.reviewImages.map { it.url },
-        userName = this.name,
-        profilePictureUrl = this.profilePictureUrl,
-        restaurantName = this.restaurantName,
-        rating = this.rating,
-        likeAmount = this.likeAmount,
+        feedTopUiState = FeedTopUiState(
+            userName = this.name,
+            profilePictureUrl = this.profilePictureUrl,
+            restaurantName = this.restaurantName,
+            rating = this.rating
+        ),
+        feedBottomUiState = FeedBottomUiState(
+            likeAmount = this.likeAmount,
+            isLike = this.isLike,
+            isFavorite = this.isFavorite,
+            isLogin = isLogin
+        ),
         commentAmount = this.commentAmount,
         comments = listOf(),
-        isLike = this.isLike,
-        isFavorite = this.isFavorite,
         contents = this.contents,
         createDate = createDate,
         height = if(this.reviewImages.isEmpty()) 500 else this.reviewImages[0].height,
         width = if(this.reviewImages.isEmpty()) 500 else this.reviewImages[0].width,
-        isLogin = isLogin
     )
 }
 
