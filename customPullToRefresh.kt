@@ -4,6 +4,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
+import com.sarang.torang.compose.feed.state.PullToRefreshLayoutState
 import com.sarang.torang.compose.feed.state.RefreshIndicatorState
 import com.sarang.torang.compose.feed.type.pullToRefreshLayoutType
 import com.sarang.torang.di.pulltorefresh.PullToRefreshData
@@ -39,9 +40,18 @@ val customPullToRefresh: pullToRefreshLayoutType = { data ->
 
     providePullToRefresh(state).invoke(
         PullToRefreshData(modifier   = data.modifier,
-                               state      = indicatorState ,
+                               state      = indicatorState.toConvert() ,
                                onRefresh  = data.onRefresh,
                                contents   = data.contents))
+}
+
+fun RefreshIndicatorState.toConvert() : com.sryang.library.pullrefresh.RefreshIndicatorState{
+    return when(this){
+        RefreshIndicatorState.Default-> com.sryang.library.pullrefresh.RefreshIndicatorState.Default
+        RefreshIndicatorState.PullingDown-> com.sryang.library.pullrefresh.RefreshIndicatorState.PullingDown
+        RefreshIndicatorState.Refreshing-> com.sryang.library.pullrefresh.RefreshIndicatorState.Refreshing
+        RefreshIndicatorState.ReachedThreshold-> com.sryang.library.pullrefresh.RefreshIndicatorState.ReachedThreshold
+    }
 }
 
 val customPullToRefreshforRestaurantReview: pullToRefreshLayoutType = { data ->
@@ -52,7 +62,7 @@ val customPullToRefreshforRestaurantReview: pullToRefreshLayoutType = { data ->
     providePullToRefresh(rememberPullToRefreshState()).invoke(
         PullToRefreshData(
             modifier = Modifier, // 음식점 상세의 review에는 scaffold의 padding을 적용하면 위에 공간이 생김
-            state = indicatorState ,
+            state = indicatorState.toConvert() ,
             onRefresh = data.onRefresh,
             contents = data.contents
         )
