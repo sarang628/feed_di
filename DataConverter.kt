@@ -3,10 +3,10 @@ package com.sarang.torang.di.feed_di
 import android.util.Log
 import com.google.gson.GsonBuilder
 import com.sarang.torang.BuildConfig
-import com.sarang.torang.compose.feed.internal.components.FeedBottomUiState
-import com.sarang.torang.compose.feed.internal.components.FeedTopUiState
+import com.sarang.torang.compose.feed.FeedBottomUiState
+import com.sarang.torang.compose.feed.FeedItemUiState
+import com.sarang.torang.compose.feed.FeedTopUiState
 import com.sarang.torang.data.ReviewAndImage
-import com.sarang.torang.data.basefeed.FeedItemUiState
 import com.sarang.torang.data.feed.Feed
 import com.sarang.torang.data.feed.FeedImage
 
