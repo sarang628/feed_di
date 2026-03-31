@@ -83,6 +83,5 @@ fun provideFeedGridPicture(
         imageLoader         = { CustomFeedImageLoader().invoke(it) },
         expandableText      = CustomExpandableTextType,
         onPage              = { lastPage = it.page},
-
         )
 }
