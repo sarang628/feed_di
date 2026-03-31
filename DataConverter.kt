@@ -13,7 +13,9 @@ import com.sarang.torang.data.ReviewAndImage
 private const val TAG = "__DataConverter"
 fun Feed.toReview(isLogin : Boolean = false): FeedItemUiState {
     return FeedItemUiState(
-        reviewImages = this.reviewImages.map { it.url },
+        reviewImages = this.reviewImages.map {
+            Pair(0, it.url)
+                                             },
         feedTopUiState = FeedTopUiState(
             userName = this.name,
             profilePictureUrl = this.profilePictureUrl,

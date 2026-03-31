@@ -61,27 +61,28 @@ fun provideFeedGridPicture(
     var lastPage : Int by remember { mutableStateOf(0) }
     var isPlayed by remember { mutableStateOf(false) }
     FeedGridPictureItem(uiState             = data.feed.toReview(data.isLogin),
-        events = FeedItemClickEvents(
-            feedTopEvents = FeedTopEvents(
-                onName = { rootNavController.profile(data.feed.userId) },
-                onProfile = { rootNavController.profile(data.feed.userId) },
-                onRestaurant = { rootNavController.restaurant(data.feed.restaurantId) },
-                onMenu = { onMenu(data.feed.reviewId) }
-            ),
-            feedBottomEvents = FeedBottomEvents(
-                onLike = { data.onLike.invoke(data.feed.reviewId) },
-                onFavorite = { data.onFavorite.invoke(data.feed.reviewId) },
-                onComment = { onComment(data.feed.reviewId) },
-                onShare = { onShare(data.feed.reviewId) },
-            ),
-            onLikes = { rootNavController.like(data.feed.reviewId) },
-            onImage = { rootNavController.imagePager(data.feed.reviewId, lastPage) },
-        ),
-        isPlaying           = data.isPlaying || isPlayed,
-        userScrollEnabled   = data.pageScrollable,
-        videoLoader         = CustomVideoPlayerType(onPlayed = { isPlayed = true }),
-        imageLoader         = { CustomFeedImageLoader().invoke(it) },
-        expandableText      = CustomExpandableTextType,
-        onPage              = { lastPage = it.page},
-        )
+                        events = FeedItemClickEvents(
+                            feedTopEvents = FeedTopEvents(
+                                onName = { rootNavController.profile(data.feed.userId) },
+                                onProfile = { rootNavController.profile(data.feed.userId) },
+                                onRestaurant = { rootNavController.restaurant(data.feed.restaurantId) },
+                                onMenu = { onMenu(data.feed.reviewId) }
+                            ),
+                            feedBottomEvents = FeedBottomEvents(
+                                onLike = { data.onLike.invoke(data.feed.reviewId) },
+                                onFavorite = { data.onFavorite.invoke(data.feed.reviewId) },
+                                onComment = { onComment(data.feed.reviewId) },
+                                onShare = { onShare(data.feed.reviewId) },
+                            ),
+                            onLikes = { rootNavController.like(data.feed.reviewId) },
+                            onImage = {
+                                Log.d(tag, "$it")
+                                rootNavController.imagePager(data.feed.reviewId, lastPage)
+                                      },
+                        ),
+                        isPlaying           = data.isPlaying || isPlayed,
+                        userScrollEnabled   = data.pageScrollable,
+                        videoLoader         = CustomVideoPlayerType(onPlayed = { isPlayed = true }),
+                        imageLoader         = { CustomFeedImageLoader().invoke(it) },
+                        expandableText      = CustomExpandableTextType)
 }
