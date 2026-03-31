@@ -1,8 +1,8 @@
 package com.sarang.torang.di.feed_di.usecase
 
+import com.sarang.torang.compose.feed.FeedUiState
 import com.sarang.torang.di.feed_di.toFeedData
 import com.sarang.torang.repository.feed.FeedLoadRepository
-import com.sarang.torang.uistate.FeedUiState
 import com.sarang.torang.usecase.GetFeedFlowUseCase
 import com.sarang.torang.usecase.IsLoginFlowForFeedUseCase
 import dagger.Module

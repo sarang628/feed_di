@@ -6,9 +6,9 @@ import com.sarang.torang.BuildConfig
 import com.sarang.torang.compose.feed.FeedBottomUiState
 import com.sarang.torang.compose.feed.FeedItemUiState
 import com.sarang.torang.compose.feed.FeedTopUiState
+import com.sarang.torang.compose.feed.data.Feed
+import com.sarang.torang.compose.feed.data.FeedImage
 import com.sarang.torang.data.ReviewAndImage
-import com.sarang.torang.data.feed.Feed
-import com.sarang.torang.data.feed.FeedImage
 
 private const val TAG = "__DataConverter"
 fun Feed.toReview(isLogin : Boolean = false): FeedItemUiState {

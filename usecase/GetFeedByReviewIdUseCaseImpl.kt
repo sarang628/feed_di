@@ -1,6 +1,6 @@
 package com.sarang.torang.di.feed_di.usecase
 
-import com.sarang.torang.data.feed.Feed
+import com.sarang.torang.compose.feed.data.Feed
 import com.sarang.torang.di.feed_di.toFeedData
 import com.sarang.torang.repository.feed.FeedFlowRepository
 import com.sarang.torang.usecase.GetFeedByReviewIdUseCase
