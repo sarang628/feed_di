@@ -13,9 +13,7 @@ import com.sarang.torang.data.ReviewAndImage
 private const val TAG = "__DataConverter"
 fun Feed.toReview(isLogin : Boolean = false): FeedItemUiState {
     return FeedItemUiState(
-        reviewImages = this.reviewImages.map {
-            Pair(0, it.url)
-                                             },
+        reviewImages = this.reviewImages.map { Pair(it.id ,it.url) },
         feedTopUiState = FeedTopUiState(
             userName = this.name,
             profilePictureUrl = this.profilePictureUrl,
@@ -53,9 +51,10 @@ fun ReviewAndImage.toFeedData(): Feed {
             contents = this.review.contents ?: "",
             reviewImages = this.images.map {
                 FeedImage(
-                    BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl,
-                    it.width ?: 0,
-                    it.height ?: 0
+                    id = it.pictureId,
+                    url = BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl,
+                    width = it.width ?: 0,
+                    height = it.height ?: 0
                 )
             },
             restaurantId = this.review.restaurantId ?: -1,
