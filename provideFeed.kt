@@ -75,10 +75,7 @@ fun provideFeedGridPicture(
                                 onShare = { onShare(data.feed.reviewId) },
                             ),
                             onLikes = { rootNavController.like(data.feed.reviewId) },
-                            onImage = {
-                                Log.d(tag, "$it")
-                                rootNavController.imagePager(data.feed.reviewId, lastPage)
-                                      },
+                            onImage = { rootNavController.restaurantImagePager(it) },
                         ),
                         isPlaying           = data.isPlaying || isPlayed,
                         userScrollEnabled   = data.pageScrollable,
